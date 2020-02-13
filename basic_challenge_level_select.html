@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="game/map_game.js"></script>
+	<style>
+	body {
+		padding: 0; margin: 0;
+	}
+	div {
+		display: block;
+		position: absolute;
+		height: 100vh;
+		width: 100%;
+		background-color: #6d7c55;
+		text-align: center;
+		vertical-align: middle;
+	}
+	a {
+		width: 200px;
+		height: 50px;
+		display: block;
+		margin: auto;
+		text-align: center;
+		vertical-align: middle;
+		color: white;
+		text-decoration: none;
+		background-color: #aa9280;
+		font-size: 36px;
+		font-family: 微軟正黑體;
+		box-shadow: 2px 2px 2px black;
+		border-radius:5px;
+	}
+	#func_list{
+		display:none;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		background-color:black;
+		opacity:0.7;
+		width: 100px;
+		height: 100px;
+		color:white;
+		padding:5px;
+	}
+	#open_funlist{
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		cursor: pointer;
+		width:50px;
+		height:50px;
+	}
+	.icon{
+		width:40px;
+		height:40px;
+	}
+	</style>
+</head>
+<body>
+<div></div>
+<img id="open_funlist" src="img/favorites.png">
+<div id="func_list">
+	<span class="func"><img class="icon" src="img/home.png">回首頁</span>
+	<span class="func"><img class="icon" src="img/speaker.png">靜音</span>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	var body_element = document.getElementsByTagName("div")[0];
+	var level_button = new Array(3);
+	for(i=0;i<3;i++){
+		level_button[i] = document.createElement("a");
+		body_element.appendChild(level_button[i]);
+		level_button[i].innerHTML = "level " + (i+1);
+		level_button[i].style.marginTop = "20px";
+	}
+	level_button[0].href = "game/easy_level1_s.html";
+	level_button[1].href = "game/easy_level2_s.html";
+	level_button[2].href = "game/easy_level3_s.html";
+	level_button[0].style.marginTop = "10%";
+	var lastpage_button = document.createElement("a");
+	body_element.appendChild(lastpage_button);
+	lastpage_button.href = "challenge_mode_difficulty.html";
+	lastpage_button.innerHTML = "上一頁";
+	lastpage_button.style.backgroundColor = "#612b09";
+	lastpage_button.style.marginTop = "20px";
+</script>
+<script type="text/javascript">
+var list = document.getElementById("func_list");
+var open = document.getElementById("open_funlist");
+var li = [];
+for(i=0;i<2;i++){
+	li[i] = document.getElementsByClassName("func")[i];
+	li[i].style.cursor="pointer";
+ }
+var flag = 0;
+document.getElementById("open_funlist").onclick=function(){
+	if(flag==0){
+		open.style.right="120px";
+		list.style.display="block";
+		flag=1;
+	}
+	else{
+		open.style.right="5px";
+		list.style.display="none";
+		flag=0;
+	}
+};
+li[0].onclick=function(){
+	location.assign("main.html");
+};
+var icon = document.getElementsByClassName("icon")[1];
+var speaker=0;
+li[1].onclick=function(){
+	if(speaker==0){
+		icon.src="img/speakers.png";
+		li[1].childNodes[1].nodeValue="播放";
+		speaker=1;
+	}
+	else{
+		icon.src="img/speaker.png";
+		li[1].childNodes[1].nodeValue="靜音";
+		speaker=0;
+	}
+};
+</script>
