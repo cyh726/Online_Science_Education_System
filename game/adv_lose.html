@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<script src="map_draw.js"></script>
+	<script src="map_game.js"></script>
+	<script src="animate_draw.js"></script>
+	<script src="data/game_data_adv_1.js"></script>
+	<style type="text/css">
+		body{
+			overflow: hidden;
+		}
+		.animate{
+			overflow: hidden;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="game_canvas"></canvas>
+	<canvas id="animate"></canvas>
+	<canvas id="button_canvas"></canvas>
+
+</body>
+</html>
+
+<script type="text/javascript">
+	var a_canvas,a_ctx;
+	var frog2 = new Image();
+	var frog3 = new Image();
+
+
+	frog2.src = 'img/frog2.png';
+	frog3.src = 'img/frog3.png';
+	// girl.src = 'img/girlandfrog.png';
+	// potion.src = 'img/potion2.png';
+	// mail2.src = 'img/mail2.png';
+
+	var ani;
+
+	window.onload = function main() {
+		var t1 = new TimelineLite({paused:true});
+		var t2 = new TimelineLite({paused:true});
+		var t3 = new TimelineLite({paused:true});
+		var t4 = new TimelineMax({paused:true});
+		var t5 = new TimelineLite({paused:true});
+		a_canvas = document.getElementById('animate');
+		document.getElementById('game_canvas').style.display = "none";
+		document.getElementById('button_canvas').style.display = "none";
+		a_ctx = a_canvas.getContext('2d');
+		a_canvas.width = 1350;
+		a_canvas.height = 750;
+		animate();
+		t1.play();
+		t2.play();
+		t3.play();
+		// t1.timeScale(10);
+		// t2.timeScale(10);
+		// t3.timeScale(100);
+		// t4.timeScale(100);
+
+		t1.to(bg_s,1,{color:"black"})
+		.to(frog2_s,0.5,{x:450,y:250,a:1})
+		.to(frog2_s,0.5,{r:-5})
+		;
+
+		t2
+		.to(frog3_s,0.5,{x:700,y:230,a:1,delay:1.1})
+		.to(frog3_s,0.5,{r:10})
+		.to(text0,1,{a:1,s:3})
+		.to(text0,0.1,{r:5})
+		.to(ffg_s,0.5,{color:"black",a:1,delay:1})
+		.to(bg_s,0.2,{color:"#2a1912",onComplete:GameOver})
+		;
+		// .staggerTo([text0,text1],1.5,{a:1},0.5)
+
+		// .to(girl_s,1,{a:1,y:200})
+		// .staggerTo([text0,text1],1.5,{a:0},0.5)
+		// .to(girl_s,1,{a:1,s:0.8,x:200,y:50})
+		// .to(bg_s,0.2,{color:"white"})
+		// .to(potion_s,1,{a:1})
+		// .to(girl_s,0.2,{a:0})
+		// .to(potion_s,1,{s:0.4})
+		// .to(mail2_s,0.5,{a:1,x:100,y:0})
+		// .to(bg_s,0.2,{color:"black"})
+		// .staggerTo([text2,text3],1,{a:1},0.5)
+		// .staggerTo([text2,text3],1,{a:0},0.5)
+		// .to(ffg_s,0.2,{color:"black",a:1})
+		// .to(bg_s,0.2,{color:"#2a1912",onComplete:GameStart})
+		// .to(bg_s,0.2,{delay:3})
+		// ;
+
+	};
+
+	
+	var bg_s ={color:"#2c3224"};
+	var fg_s ={color:"#2c3224",a:0};
+	var ffg_s ={color:"#2c3224",a:0};
+	var frog2_s ={x:400,y:300,a:0,s:0.3,r:0};
+	var frog3_s ={x:700,y:0,a:0,s:0.2,r:0};
+
+	// var mail2_s={x:0,y:0,a:0,s:0.7,r:35};
+	// var potion_s ={x:700,y:200,a:0,s:0.2};
+	// var girl_s ={x:0,y:0,a:1,s:0.8};
+	// var girl_s ={x:-100,y:500,a:1,s:1};
+	var text0 = {x:420,y:160,a:0,color:"white",s:3,r:0};
+	var text1 = {x:600,y:300,a:0,color:"white",s:3,r:0};
+	var text2 = {x:400,y:100,a:0,color:"white",s:3,r:0};
+	var text3 = {x:500,y:180,a:0,color:"white",s:4,r:0};
+	var text4 = {x:300,y:300,a:0,color:"white",s:4,r:0};
+	var text5 = {x:100,y:200,a:0,color:"white",s:3,r:0};
+	var text6 = {x:100,y:300,a:0,color:"white",s:3,r:0};
+	
+	function animate(){
+		_draw_rect(0,0,1,[1,1],0,bg_s.color,a_canvas.width,a_canvas.height);
+		_draw_img(frog3,frog3_s.x,frog3_s.y,frog3_s.a,[frog3_s.s,frog3_s.s],frog3_s.r);
+		_draw_img(frog2,frog2_s.x,frog2_s.y,frog2_s.a,[frog2_s.s,frog2_s.s],frog2_s.r);
+		_draw_text(text0.x,text0.y,text0.a,[text0.s,text0.s],text0.r,text0.color,"只能一輩子當青蛙了呢...");
+		_draw_text(text1.x,text1.y,text1.a,[text1.s,text1.s],text1.r,text1.color,"要去找變回來的方法。");
+		_draw_text(text2.x,text2.y,text2.a,[text2.s,text2.s],text2.r,text2.color,"這個是...");
+		_draw_text(text3.x,text3.y,text3.a,[text3.s,text3.s],text3.r,text3.color,"到底個才是對的呢");
+		_draw_text(text4.x,text4.y,text4.a,[text4.s,text4.s],text4.r,text4.color,"....");
+		_draw_text(text5.x,text5.y,text5.a,[text5.s,text5.s],text5.r,text5.color,"他現在在哪呢 ...");
+		_draw_text(text6.x,text6.y,text6.a,[text6.s,text6.s],text6.r,text6.color,"我需要去救他。");
+		_draw_rect(0,0,ffg_s.a,[1,1],0,ffg_s.color,a_canvas.width,a_canvas.height);
+		ani = window.requestAnimationFrame(animate);
+	};
+
+	function GameOver(){
+		setTimeout(function(){window.location.href="../advanced_challenge_level_select.html";},1000);
+	}
+
+
+</script>

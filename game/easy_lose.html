@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<style>
+	body {
+		padding: 0;
+		margin: 0;
+		background-color:#645b4a;
+		overflow:hidden;
+	}
+	#spy {
+		position: absolute;
+		bottom:70px;
+		left:500px;
+	}
+	#jail{
+		position:absolute;
+		right:1000px;
+		height:100hv;
+		width:100%;
+	}
+	#lose{
+		position:absolute;
+		margin:200px auto auto 500px ;
+		color:white;
+		font-size: 100px;
+		font-weight: bold;
+		opacity:0;
+	}
+	</style>
+</head>
+<body>
+	<div id="animate">
+		<img id="spy" src="img/spy_o.png" height="350" width="200">
+		<img id="jail" src="img/jail.png">
+		<p id="lose">被抓了!</p>
+	</div>
+</body>
+<script>
+    var spy = document.getElementById("spy");
+	var jail = document.getElementById("jail");
+	var lose = document.getElementById("lose");
+	var tl = new TimelineLite();
+	
+	tl.to(jail,3,{right:"0"})
+	.to(spy,1,{rotation:"90deg",bottom:"-=80px",left:"+=100px"})
+	.to(lose,1,{opacity:0.9})
+	.to(lose,0.2,{onComplete:GameOver});
+
+
+	function GameOver(){
+		setTimeout(function(){window.location.href="../basic_challenge_level_select.html";},1000);
+	}
+</script>
+</html>

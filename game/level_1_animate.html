@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LEVEL 1</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<script src="map_draw.js"></script>
+	<script src="map_game.js"></script>
+	<script src="data/game_data.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<style type="text/css">
+		body{
+			overflow: hidden;
+		}
+		.animate{
+			overflow: hidden;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="game_canvas"></canvas>
+	<canvas id="animate"></canvas>
+	<canvas id="button_canvas"></canvas>
+
+</body>
+</html>
+
+<script type="text/javascript">
+	var a_canvas,a_ctx;
+	var bg = new Image();
+	var hand = new Image();
+	var mailbox = new Image();
+	var tree = new Image();
+	var mail = new Image();
+	var mail2 = new Image();
+	var photo = new Image();
+	bg.src = 'rsc/mailbox_bg.png';
+	hand.src = 'rsc/badhand.png';
+	mailbox.src = 'rsc/mailbox.png';
+	tree.src = 'rsc/tree.png';
+	mail.src = 'rsc/mail.png';
+	mail2.src = 'rsc/mail2.png';
+	photo.src = 'rsc/photo.png';
+	var ani;
+
+	window.onload = function main() {
+		var t1 = new TimelineLite({paused:true});
+		var t2 = new TimelineLite({paused:true});
+		var t3 = new TimelineLite({paused:true});
+		var t4 = new TimelineMax({paused:true});
+		var t5 = new TimelineLite({paused:true});
+		a_canvas = document.getElementById('animate');
+		document.getElementById('game_canvas').style.display = "none";
+		document.getElementById('button_canvas').style.display = "none";
+		a_ctx = a_canvas.getContext('2d');
+		a_canvas.width = 1350;
+		a_canvas.height = 750;
+		bg.onload = animate();
+		t2.play();
+		t1.play();
+		t3.play();
+		// t1.timeScale(100);
+		// t2.timeScale(100);
+		// t3.timeScale(100);
+		// t4.timeScale(100);
+		
+		t1.to(mailbox_s,1,{x:800,y:50,a:0.8,s:0.5,delay:0.5})
+		.to(hand2_s,1.5,{x:1800,y:-500,s:0.55,a:0.6})
+		.to(hand_s,0.5,{a:0.4})
+		.to(hand4_s,1,{x:-50,y:-400,a:0.7,s:0.2,r:0,s:0.5})
+		.to(hand2_s,1.5,{x:1900,y:-600,a:0,s:0.45,r:95,delay:3})
+		
+		
+		t2.to(tree_s,1,{a:0.9,s:1})
+		.to(hand_s,2,{x:100,y:1300,s:0.55,a:0.9})
+		.to(hand3_s,1,{x:400,y:1700,a:0.2,delay:3.5})
+		.to(hand_s,1,{x:-200,y:1500,a:0});
+
+		t3.to(mail_s,3,{})
+		.to(mail_s,0,{})
+		.to(mail_s,3.5,{x:800,y:300,a:0.9,s:0.2,r:20})
+		.to(mail_s,1.5,{a:0})
+		.to(hand4_s,1,{x:-150,y:-900,a:0})
+		.to(hand4_s,0,{onComplete:function(){t4.play();}})
+
+		t4.to(fg_s,3,{color:"black", a:1})
+		.to(mail2_s,1,{a:0.9,x:800,y:500})
+		.to(text0,0.3,{a:1,delay:0.5})
+		.to(text0,0.3,{a:0.5,delay:0.5})
+		.to(text1,0.3,{a:1,delay:0.5})
+		.to(text1,0.3,{a:0.5,delay:0.5})
+		.to(text2,0.3,{a:1,delay:0.5})
+		.to(text2,0.3,{a:0.5,delay:0.5})
+		.to([text0,text1,text2],2,{a:0})
+		.to(mail2_s,1,{a:0.9,x:500,y:300,s:0.5,r:20})
+		.staggerTo([text3,text4],1,{a:1},0.5)
+		.to(photo_s,1,{a:0.99,x:500,y:100,s:0.5,r:0})
+		.staggerTo([text3,text4],1.6,{a:0},0)
+		.staggerTo([text5,text6],1.6,{a:1},0)
+		.to(ffg_s,1,{a:1,color:"#2a1912",onComplete:GameStart})
+		;
+	};
+
+	
+	var mailbox_s={x:700,y:100,a:0.5,s:0.45};
+	var mail_s={x:-150,y:-900,a:0.35,s:0.2,r:10};
+	var mail2_s={x:900,y:800,a:0,s:0.7,r:-35};
+	var hand_s={x:-100,y:1500,a:0.35,s:0.45,r:-95};
+	var hand2_s={x:1900,y:-600,a:0,s:0.45,r:95};
+	var hand3_s={x:300,y:1700,a:0.5,s:0.2,r:-95};
+	var hand4_s={x:-150,y:-900,a:0.5,s:0.2,r:0,s:0.5};
+	var photo_s={x:500,y:800,a:0.5,s:0.2,r:45,s:0};
+	// var hand4_s={x:-50,y:-400,a:0.5,s:0.2,r:0,s:0.5};
+	var tree_s={x:0,y:0,a:0.2,s:0.8};
+	var bg_s ={color:"#2c3224"};
+	var fg_s ={color:"#2c3224",a:0};
+	var ffg_s ={color:"#2c3224",a:0};
+	var text0 = {x:200,y:200,a:0,color:"white",s:3,r:0};
+	var text1 = {x:200,y:300,a:0,color:"white",s:3,r:0};
+	var text2 = {x:200,y:400,a:0,color:"white",s:3,r:0};
+	var text3 = {x:200,y:200,a:0,color:"white",s:4,r:0};
+	var text4 = {x:200,y:300,a:0,color:"white",s:4,r:0};
+	var text5 = {x:100,y:200,a:0,color:"white",s:3,r:0};
+	var text6 = {x:100,y:300,a:0,color:"white",s:3,r:0};
+	
+	function animate(){
+		_draw_rect(0,0,1,[1,1],0,bg_s.color,a_canvas.width,a_canvas.height);
+		_draw_img(tree,0,0,tree_s.a,[tree_s.s,tree_s.s]);
+		_draw_img(mailbox,mailbox_s.x,mailbox_s.y,mailbox_s.a,[mailbox_s.s,mailbox_s.s]);
+		_draw_img(hand,hand2_s.x,hand2_s.y,hand2_s.a,[hand2_s.s,hand2_s.s],hand2_s.r);
+		_draw_img(hand,hand_s.x,hand_s.y,hand_s.a,[hand_s.s,hand_s.s],hand_s.r);
+		_draw_img(mail,mail_s.x,mail_s.y,mail_s.a,[mail_s.s,mail_s.s],mail_s.r);
+		_draw_img(hand,hand3_s.x,hand3_s.y,hand3_s.a,[hand3_s.s,hand3_s.s],hand3_s.r);
+		_draw_img(hand,hand4_s.x,hand4_s.y,hand4_s.a,[hand4_s.s,hand4_s.s],hand4_s.r);
+		_draw_rect(0,0,fg_s.a,[1,1],0,fg_s.color,a_canvas.width,a_canvas.height);
+		_draw_text(text0.x,text0.y,text0.a,[text0.s,text0.s],text0.r,text0.color,"來自魚王的信...");
+		_draw_text(text1.x,text1.y,text1.a,[text1.s,text1.s],text1.r,text1.color,"我的好朋友...");
+		_draw_text(text2.x,text2.y,text2.a,[text2.s,text2.s],text2.r,text2.color,"Mr. spy 被抓住了...");
+		_draw_text(text3.x,text3.y,text3.a,[text3.s,text3.s],text3.r,text3.color,"這個是...");
+		_draw_text(text4.x,text4.y,text4.a,[text4.s,text4.s],text4.r,text4.color,"....");
+		_draw_img(mail2,mail2_s.x,mail2_s.y,mail2_s.a,[mail2_s.s,mail2_s.s],mail2_s.r);
+		_draw_img(photo,photo_s.x,photo_s.y,photo_s.a,[photo_s.s,photo_s.s],photo_s.r);
+		_draw_text(text5.x,text5.y,text5.a,[text5.s,text5.s],text5.r,text5.color,"他現在在哪呢 ...");
+		_draw_text(text6.x,text6.y,text6.a,[text6.s,text6.s],text6.r,text6.color,"我需要去救他。");
+		_draw_rect(0,0,ffg_s.a,[1,1],0,ffg_s.color,a_canvas.width,a_canvas.height);
+		ani = window.requestAnimationFrame(animate);
+	};
+
+
+
+
+	function _draw_img(img,x,y,alpha=1,scale=[1,1],rotate=0){
+		a_ctx.save();
+		a_ctx.translate(x,y);
+		a_ctx.scale(scale[0],scale[1]);
+		a_ctx.rotate(Math.PI/180*rotate);
+		a_ctx.globalAlpha = alpha;
+		a_ctx.drawImage(img,0,0);
+		a_ctx.restore();
+	}
+
+	function _draw_rect(x,y,alpha=1,scale=[1,1],rotate=0,color,w,h){
+		a_ctx.save();
+		a_ctx.translate(x,y);
+		a_ctx.scale(scale[0],scale[1]);
+		a_ctx.rotate(Math.PI/180*rotate);
+		a_ctx.globalAlpha = alpha;
+		a_ctx.fillStyle=color;
+		a_ctx.fillRect(0,0,w,h);
+		a_ctx.restore();
+	}
+
+	function _draw_text(x,y,alpha=1,scale=[1,1],rotate=0,color,text){
+		a_ctx.save();
+		a_ctx.translate(x,y);
+		a_ctx.scale(scale[0],scale[1]);
+		a_ctx.rotate(Math.PI/180*rotate);
+		a_ctx.globalAlpha = alpha;
+		a_ctx.fillStyle=color;
+		a_ctx.fillText(text,0,0);
+		a_ctx.font = "100 "+20+"px Courier New";
+		a_ctx.restore();
+	}
+	
+	function GameStart(){
+		document.getElementById('game_canvas').style.display = "inline-block";
+		document.getElementById('game_canvas').style.display = "inline-block";
+		document.getElementById('game_canvas').style+="position:absolute;right:0;top:100px;z-index:0;float:left;";
+		document.getElementById('button_canvas').style+="position:absolute;right:0px;top:0px;z-index:1;float:right;";
+		a_canvas.style.display="none";
+		game_setup(dot_data,line_data,"game_canvas","button_canvas",1210,650);
+		en_touch_dot=true;
+		en_touch_button=true;
+		task_start();
+
+	}
+
+</script>

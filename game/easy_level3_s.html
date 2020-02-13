@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<script src="map_draw.js"></script>
+	<script src="map_game.js"></script>
+	<script src="data/game_data_easy_3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<style>
+	body {
+		padding: 0;
+		margin: 0;
+		background-color:#b6beaa;
+	}
+	#spy {
+		position: absolute;
+		bottom:70px;
+		left:0px;
+		opacity:0;
+	}
+	#dialogue{
+		position:absolute;
+		top:5%;
+		left:150px;
+		height:80px;
+		width:80%;
+		border: 2px solid #c87031;
+		border-radius: 30px;
+		background-color: #c87031;
+		text-align:center;
+		opacity:0.9;
+	}
+	#sentence {
+		margin:10px 50px;
+		color:#552500;
+		font-size: 32px;
+		font-weight: bold;
+		font-family: Papyrus 微軟正黑體;
+		opacity:0;
+	}
+	#mail{
+		position:absolute;
+		opacity:0;
+	}
+	#letter{
+		position:absolute;
+		bottom:250px;
+		left:190px;
+		opacity:0;
+	}
+	#table{
+		position:absolute;
+		bottom:50px;
+		left:500px;
+	}
+	</style>
+</head>
+<body>
+	<div id="animate">
+		<img id="spy" src="img/spy_o.png" height="350" width="200">
+		<img id="table" src="img/table.png" height="250" width="350">
+		<img id="letter" src="img/letter.png" height="100" width="80">
+		<img id="mail" src="img/mail.png" height="80" width="100">
+		<span id="dialogue"><p id="sentence"></p></span>
+	</div>
+	<canvas id="game_canvas"></canvas>
+	<canvas id="button_canvas"></canvas>
+</body>
+<script>
+	var sentence = document.getElementById("sentence");
+    var spy = document.getElementById("spy");
+	var letter = document.getElementById("letter");
+	var mail = document.getElementById("mail");
+	var dialogue = document.getElementById("dialogue");
+	var tl = new TimelineLite();
+	var timeout_id;
+	sentence.innerHTML="為了把消息送回圓圈國";
+	
+	tl.to(sentence,0.5,{opacity:1})
+	.to([spy,letter],1.5,{opacity:1,left:"+=400px"})
+	.to(letter,0.2,{opacity:0});
+	timeout_id=setTimeout(function(){
+  		sentence.innerHTML="MR.SPY要將訊息加密，以免被三角國發現";
+		letter.style.width="50px";
+		letter.style.left="600px";
+		letter.style.bottom="200px";
+		letter.style.transform="skew(-40deg) rotate(90deg)";
+		tl.to(letter,0.2,{opacity:1})
+		.to(mail,2,{onComplete:GameStart});
+  	},2200);
+
+
+	function GameStart(){
+		document.getElementById('game_canvas').style.display = "inline-block";
+		document.getElementById('game_canvas').style.display = "inline-block";
+		document.getElementById('game_canvas').style+="position:absolute;right:0;top:100px;z-index:0;float:left;";
+		document.getElementById('button_canvas').style+="position:absolute;right:0px;top:0px;z-index:1;float:right;";
+		document.getElementById('animate').style.display="none";
+		tl.stop();
+		clearTimeout(timeout_id);
+
+		game_setup(dot_data,line_data,"game_canvas","button_canvas",1210,650);
+		en_touch_dot=true;
+		en_touch_button=true;
+		task_start();
+
+	}
+</script>
+</html>

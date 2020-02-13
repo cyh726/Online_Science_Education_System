@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<script src="map_draw.js"></script>
+	<script src="map_game.js"></script>
+	<script src="data/game_data_easy_2.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<style>
+	body {
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+	}
+	#bg {
+		display: block;
+		position: absolute;
+		height: 100vh;
+		width:100%;
+	}
+	#spy {
+		position: absolute;
+		bottom:50px;
+		right:0px;
+		opacity:0;
+	}
+	#contain{
+		position:absolute;
+		top:5%;
+		left:150px;
+		height:80px;
+		width:80%;
+		border: 2px solid #6d7c55;
+		border-radius: 30px;
+		background-color: #6d7c55;
+		text-align:center;
+		opacity:0.9;
+	}
+	#sentence {
+		margin:10px 50px;
+		color:white;
+		font-size: 32px;
+		font-weight: bold;
+		font-family: Papyrus 微軟正黑體;
+		opacity:0;
+	}
+	#guard{
+		position: absolute;
+		bottom:50px;
+		right:400px;
+	}
+	#guard2{
+		position: absolute;
+		bottom:50px;
+		left:250px;
+	}
+	#dialogue{
+		position: absolute;
+		opacity:0;
+		border: 2px solid #6d7c55;
+		border-radius: 5px;
+		background-color: #6d7c55;
+		padding:10px 50px;
+		color:white;
+		font-size: 24px;
+		font-weight: bold;
+	}
+	#dialogue::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 80%;
+		margin-left: -5px;
+		border-width: 10px;
+		border-style: solid;
+		border-color: #6d7c55 transparent transparent transparent;
+	}
+	#letter{
+		position: absolute;
+		top:280px;
+		left:500px;
+		opacity:0;
+	}
+	#skip {
+		position: absolute;
+		bottom: 5px;
+		right: 20px;
+		color: #220e00;
+		font-size: 30px;
+		font-weight: bold;
+		font-family: Papyrus;
+		transition: 0.3s;
+		text-decoration: none;
+		cursor:pointer;
+	}
+	</style>
+</head>
+<body>
+	<div id="animate">
+		<img id="bg" src="img/advanced_bg2.jpg">
+		<img id="guard" src="img/guard.png" height="350" width="180">
+		<img id="guard2" src="img/guard.png" height="350" width="180">
+		<img id="spy" src="img/spy_t.png" height="350" width="180">
+		<img id="letter" src="img/letter.png" width="70" height="70">
+		<span id="contain"><p id="sentence"></p></span>
+		<p id="dialogue"></p>
+		<h1 id="skip" onclick="GameStart()">SKIP</h1>
+	</div>
+	<canvas id="game_canvas"></canvas>
+	<canvas id="button_canvas"></canvas>
+</body>
+<script>
+	var sentence = document.getElementById("sentence");
+    var spy = document.getElementById("spy");
+	var letter = document.getElementById("letter");
+	var contain = document.getElementById("contain");
+	var dialogue = document.getElementById("dialogue");
+	var tl = new TimelineLite();
+	var tl2 = new TimelineLite();
+	var guard=[];
+	var timeout_id;
+	guard[0]=document.getElementById("guard");
+	guard[1]=document.getElementById("guard2");
+	
+	sentence.innerHTML="得知任務內容後";
+	guard[0].style.transform="scaleX(-1)";
+	tl.to(sentence,1, {opacity:1});
+	setTimeout(function(){
+  		sentence.innerHTML="MR.SPY開始行動...";
+  		tl.to([sentence,contain],1,{})
+		.to([sentence,contain],0.5,{opacity:0});
+  	},2000);
+	setTimeout(function(){
+  		dialogue.innerHTML="你顧一下，我去廁所";
+  		dialogue.style.opacity="1";
+		dialogue.style.top="150px";
+		dialogue.style.left="100px";
+		tl.to(dialogue,1, {})
+		.to(dialogue,0.5, {opacity:0});
+  	},3500);
+	setTimeout(function(){
+  		dialogue.innerHTML="喔!好";
+  		dialogue.style.opacity="1";
+		dialogue.style.top="150px";
+		dialogue.style.left="780px";
+		document.styleSheets[0].addRule('#dialogue::after','left: 20%');
+		document.styleSheets[0].insertRule('#dialogue::after { left: 20%; }', 0);
+		tl.to(dialogue,1,{})
+		.to(dialogue,0.5,{opacity:0});
+  	},5000);
+	setTimeout(function(){
+		tl.to(guard[1],1,{scaleX:"-1"})
+		.to(guard[1],2,{left:"-=400px",opacity:0})
+		.to(guard[0],3,{left:"-=600px"})
+		.to(guard[0],0.5,{scaleX:"-1"})
+		.to(guard[0],3,{left:"+=600px"})
+		.to(guard[0],0.5,{scaleX:"1"})
+		.to(guard[0],2,{left:"-=400px"});
+  	},6500);
+	setTimeout(function(){
+		spy.style.transform="scaleX(-1)";
+		TweenLite.to(spy,0.5,{opacity:1});
+		tl2.to(spy,1.2,{left:"-=580px",ease:Linear.easeNone})
+		.to(spy,0.2,{top:"-=50px",rotation:"190deg"})
+		.to(spy,0.1,{left:"-=50px",top:"+=50px",rotation:"170deg"})
+		.to(guard[0],1,{rotation:"90deg",top:"+=200px",left:"-=80px"});
+  	},17000);
+	setTimeout(function(){
+		sentence.innerHTML="MR.SPY終於拿到相關文件";
+		tl.to(spy,0.3,{rotation:"180deg"})
+		.to(spy,0.7,{scaleX:"0.9",scaleY:"-0.9",top:"-=20px",left:"-=30px"})
+		.to(spy,0.7,{scaleX:"0.8",scaleY:"-0.8",top:"-=5px",left:"-=10px"})
+		.to(spy,0.7,{scaleX:"0.7",scaleY:"-0.7",top:"-=5px",left:"-=5px"})
+		.to(spy,0.3,{rotation:"170deg"})
+		.to(letter,0,{opacity:1})
+		.to(spy,0.3,{rotation:"180deg"})
+		.to([sentence,contain],1, {opacity:0.9});
+  	},19000);
+	setTimeout(function(){
+		sentence.innerHTML="不過這封文件需要解碼...";
+  	},24000);
+	timeout_id=setTimeout(function(){
+		GameStart();
+  	},24001);
+	
+	function GameStart(){
+		document.getElementById('game_canvas').style.display = "inline-block";
+		document.getElementById('game_canvas').style.display = "inline-block";
+		document.getElementById('game_canvas').style+="position:absolute;right:0;top:100px;z-index:0;float:left;";
+		document.getElementById('button_canvas').style+="position:absolute;right:0px;top:0px;z-index:1;float:right;";
+		document.getElementById('animate').style.display="none";
+		clearTimeout(timeout_id);
+		game_setup(dot_data,line_data,"game_canvas","button_canvas",1210,650);
+		en_touch_dot=true;
+		en_touch_button=true;
+		task_start();
+
+	}
+</script>
+</html>

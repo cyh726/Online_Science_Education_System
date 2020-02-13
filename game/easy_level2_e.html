@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<style>
+	body {
+		padding: 0;
+		margin: 0;
+		background-color:#b6beaa;
+		overflow:hidden;
+	}
+	#spy {
+		position: absolute;
+		bottom:70px;
+		left:500px;
+	}
+	#dialogue{
+		position:absolute;
+		top:5%;
+		left:150px;
+		height:80px;
+		width:80%;
+		border: 2px solid #c87031;
+		border-radius: 30px;
+		background-color: #c87031;
+		text-align:center;
+		opacity:0.9;
+	}
+	#sentence {
+		margin:10px 50px;
+		color:#552500;
+		font-size: 32px;
+		font-weight: bold;
+		font-family: Papyrus 微軟正黑體;
+		opacity:0;
+	}
+	#mail{
+		position:absolute;
+		bottom:270px;
+		left:690px;
+	}
+	#letter{
+		position:absolute;
+		bottom:250px;
+		left:690px;
+	}
+	#weapon{
+		position:absolute;
+		bottom:50px;
+		left:500px;
+		opacity:0;
+	}
+	</style>
+</head>
+<body>
+	<div id="animate">
+		<img id="spy" src="img/spy_o.png" height="350" width="200">
+		<img id="letter" src="img/letter.png" height="100" width="80">
+		<img id="weapon" src="img/weapon_u.png" height="400" width="400">
+		<span id="dialogue"><p id="sentence"></p></span>
+	</div>
+</body>
+<script>
+	var sentence = document.getElementById("sentence");
+	var letter = document.getElementById("letter");
+	var weapon = document.getElementById("weapon");
+    var spy = document.getElementById("spy");
+	var dialogue = document.getElementById("dialogue");
+	var tl = new TimelineLite();
+	
+	sentence.innerHTML="MR.Spy從文件中得知，原來新的武器是...";
+	
+	tl.to(sentence,1,{opacity:1})
+	.to(letter,0.5,{opacity:0})
+	.to(spy,1,{left:"-=300px"});
+	setTimeout(function(){
+		tl.to(weapon,1,{opacity:1})
+		.to(weapon,5,{rotation:"3600deg"});
+  	},1500);
+	setTimeout(function(){
+  		weapon.src="img/weapon.png";
+		weapon.style.width="225px";
+		weapon.style.left="550px";
+  	},5500);
+	setTimeout(function(){
+  		sentence.innerHTML="三角國新開發路上運具--FEET!!!";
+		tl.to(spy,1,{rotation:"-90deg",top:"+=100px",left:"+=100px"});
+  	},8500);
+	setTimeout(function(){
+  		sentence.innerHTML=". . . . . . . . . . .";
+		tl.to(spy,1,{rotation:"-60deg",top:"-=40px",left:"-=40px"})
+		.to(spy,1,{rotation:"-80deg",top:"+=10px",left:"+=10px"})
+		.to(spy,1,{rotation:"0deg",top:"-=70px",left:"-=70px"})
+		.to(spy,1,{left:"+=200px"})
+		.to(spy,0.2,{top:"-=50px",rotation:"-10deg"})
+		.to(spy,0.1,{left:"+=50px",top:"+=50px",rotation:"10deg"})
+		.to(weapon,0.1,{rotation:"90deg"})
+		.to(weapon,1,{rotation:"180deg",top:"+=300px",left:"+=80px"});
+  	},10000);
+	setTimeout(function(){
+		TweenLite.to(spy,0.1,{rotation:"0deg"});
+  	},15000);
+	setTimeout(function(){
+		sentence.innerHTML="MR.Spy要將這個消息送回圓圈國...";
+		TweenLite.to(spy,3,{opacity:0,left:"+=800px"});
+  	},15500);
+	setTimeout(function(){
+		location.replace("../basic_challenge_level_select.html");
+  	},20500);
+</script>
+</html>

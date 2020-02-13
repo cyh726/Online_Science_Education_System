@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>level 1</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<script src="map_draw.js"></script>
+	<script src="map_game.js"></script>
+	<script src="data/game_data.js"></script>
+</head>
+<body>
+	<canvas id="game_canvas"></canvas>
+	<canvas id="button_canvas"></canvas>
+</body>
+<script type="text/javascript">
+	
+
+	window.onload = function(){
+		mode = 3;
+		// ------------------------------------------------------
+		// 顯示map的背景、中間有目標視窗
+		en_touch_button = en_click_button  =true;
+		game_setup(dot_data,line_data,"game_canvas","button_canvas",1000,600);
+		scene_1_show();
+	
+		task_start();
+		
+	
+	}
+
+	function scene_1_show(){
+		en_touch_dot=true;
+		en_touch_button=true;
+		update();
+	}
+
+	function scene_1_off(){
+		en_touch_dot=false;
+		en_touch_button=false;
+	}
+
+   
+</script>
+</html>

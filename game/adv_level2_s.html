@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<script src="map_draw.js"></script>
+	<script src="map_game.js"></script>
+	<script src="animate_draw.js"></script>
+	<script src="data/game_data_adv_2.js"></script>
+	<style type="text/css">
+		body{
+			overflow: hidden;
+		}
+		#animate{
+			overflow: hidden;
+		}
+		#skip {
+			position: absolute;
+			bottom: 5px;
+			right: 20px;
+			color: #220e00;
+			font-size: 30px;
+			font-weight: bold;
+			font-family: Papyrus;
+			transition: 0.3s;
+			text-decoration: none;
+			cursor:pointer;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="game_canvas"></canvas>
+	<canvas id="animate"></canvas>
+	<canvas id="button_canvas"></canvas>
+	<div id="s"><h1 id="skip" onclick="GameStart()">SKIP</h1></div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+	var a_canvas,a_ctx;
+	var frog = new Image();
+	var spy = new Image();
+	var jail = new Image();
+	var fog = new Image();
+	var potion = new Image();
+
+	frog.src = 'img/frog.png';
+	spy.src = 'img/spy_o.png';
+	jail.src = 'img/jail_2.png';
+	fog.src = 'img/fog.png';
+	potion.src = 'img/potion.png';
+	var ani;
+	var t1 = new TimelineLite({paused:true});
+	var t2 = new TimelineLite({paused:true});
+
+	window.onload = function main() {
+		a_canvas = document.getElementById('animate');
+		document.getElementById('game_canvas').style.display = "none";
+		document.getElementById('button_canvas').style.display = "none";
+		a_ctx = a_canvas.getContext('2d');
+		a_canvas.width = 1350;
+		a_canvas.height = 750;
+		animate();
+		t1.play();
+		t2.play();
+
+		t1.to(spy_s,1.5,{x:1500,y:-150,s:0.9,a:0.9})
+		.staggerTo([text0,text1],1.5,{a:1,x:100},1.2)
+		.staggerTo([text0,text1],1,{a:0},0)
+		.to(bg_s,0.2,{color:"white"})
+		.to(spy_s,0.5,{x:650,y:100,s:0.15})
+		.to(spy_s,0.5,{x:700,r:0})
+		.to(jail_s,0.2,{x:380,y:0,a:1,s:0.6,r:-2})
+		.to(bg_s,0.5,{color:"#1a0000"})
+		.to(bg_s,0.5,{color:"#000000"})
+		.to(potion_s,0.5,{x:550,y:180,a:1,s:0.2,r:130})
+		.to(potion_s,0.3,{a:0,r:90})
+		.to(fog_s,0.5,{x:200,a:1})
+		.to(spy_s,0.5,{a:0})
+		.to(fog_s,0.5,{x:200,a:0})
+		.to(frog_s,0.3,{a:1})
+		.to(text2,0.3,{a:0,x:400,delay:0.5})
+		.to([frog1_s,frog2_s,frog3_s,frog4_s],1,{a:1,delay:0.2})
+		.staggerTo([frog_s,frog1_s,frog2_s,frog3_s,frog4_s],1,{x:"+=400"},0.01)
+		.staggerTo([text3,text4,text5,text6],1,{a:1,delay:1},1)
+		.staggerTo([text3,text4,text5,text6],1,{a:0,delay:0.2},0.2)
+		.staggerTo([frog_s,frog1_s,frog2_s,frog3_s,frog4_s],1,{a:0},0.01)
+		.to(bg_s,0.2,{color:"#2a1912",onComplete:GameStart})
+		.to(bg_s,0.2,{delay:2})
+		;
+
+		t2.to(fog2_s,8,{})
+		.to(fog2_s,0.5,{x:500,a:1})
+		.to(fog2_s,0.5,{x:500,a:0,delay:0.5})
+		.to(jail_s,0.5,{a:0})
+		.to(text2,0.3,{a:1,x:400})
+		;
+		
+	};
+
+	
+	var bg_s ={color:"#2c3224"};
+	var fg_s ={color:"#2c3224",a:0};
+	var ffg_s ={color:"#2c3224",a:0};
+	var frog_s ={x:550,y:300,a:0,s:0.2};
+	var frog2_s ={x:700,y:300,a:0,s:0.2};
+	var frog3_s ={x:450,y:300,a:0,s:0.15,r:10};
+	var frog4_s ={x:600,y:220,a:0,s:0.18,r:8};
+	var frog1_s ={x:300,y:300,a:0,s:0.2};
+	var spy_s ={x:0,y:500,a:0.5,s:0.7,r:5};
+	var jail_s ={x:400,y:-400,a:0,s:0.6,r:-2};
+	var fog_s ={x:100,y:200,a:0,s:0.5,r:0};
+	var fog2_s ={x:600,y:100,a:0,s:0.7,r:0};
+	var potion_s ={x:0,y:0,a:0,s:1,r:0};
+	// var potion_s ={x:550,y:180,a:1,s:0.2,r:130};
+	var text0 = {x:50,y:200,a:0,color:"white",s:3,r:0};
+	var text1 = {x:50,y:300,a:0,color:"white",s:3,r:0};
+	var text2 = {x:200,y:100,a:0,color:"white",s:3,r:0};
+	var text3 = {x:200,y:100,a:0,color:"white",s:3,r:0};
+	var text4 = {x:200,y:200,a:0,color:"white",s:3,r:0};
+	var text5 = {x:200,y:300,a:0,color:"white",s:3,r:0};
+	var text6 = {x:200,y:400,a:0,color:"white",s:3,r:0};
+	
+	function animate(){
+		_draw_rect(0,0,1,[1,1],0,bg_s.color,a_canvas.width,a_canvas.height);
+		_draw_img(frog,frog1_s.x,frog1_s.y,frog1_s.a,[frog1_s.s,frog1_s.s],frog1_s.r);
+		_draw_img(frog,frog2_s.x,frog2_s.y,frog2_s.a,[frog2_s.s,frog2_s.s],frog2_s.r);
+		_draw_img(frog,frog3_s.x,frog3_s.y,frog3_s.a,[frog3_s.s,frog3_s.s],frog3_s.r);
+		_draw_img(frog,frog4_s.x,frog4_s.y,frog4_s.a,[frog4_s.s,frog4_s.s],frog4_s.r);
+		_draw_img(frog,frog_s.x,frog_s.y,frog_s.a,[frog_s.s,frog_s.s],frog_s.r);
+		_draw_img(spy,spy_s.x,spy_s.y,spy_s.a,[-spy_s.s,spy_s.s],spy_s.r);
+		_draw_img(jail,jail_s.x,jail_s.y,jail_s.a,[jail_s.s,jail_s.s],jail_s.r);
+		_draw_img(fog,fog_s.x,fog_s.y,fog_s.a,[fog_s.s,fog_s.s],fog_s.r);
+		_draw_img(fog,fog2_s.x,fog2_s.y,fog2_s.a,[fog2_s.s,fog2_s.s],fog2_s.r);
+		_draw_img(potion,potion_s.x,potion_s.y,potion_s.a,[potion_s.s,potion_s.s],potion_s.r);
+		_draw_text(text0.x,text0.y,text0.a,[text0.s,text0.s],text0.r,text0.color,"我是 Mr. spy...");
+		_draw_text(text1.x,text1.y,text1.a,[text1.s,text1.s],text1.r,text1.color,"幾天前...");
+		_draw_text(text2.x,text2.y,text2.a,[text2.s,text2.s],text2.r,text2.color,"我被魚王變成青蛙了");
+		_draw_text(text3.x,text3.y,text3.a,[text3.s,text3.s],text3.r,text3.color,"但是這裡有無數隻青蛙");
+		_draw_text(text4.x,text4.y,text4.a,[text4.s,text4.s],text4.r,text4.color,"我需要告訴K醬我是哪隻....");
+		_draw_text(text5.x,text5.y,text5.a,[text5.s,text5.s],text5.r,text5.color," ...");
+		_draw_text(text6.x,text6.y,text6.a,[text6.s,text6.s],text6.r,text6.color,"但是不能被他發現。");
+		_draw_rect(0,0,ffg_s.a,[1,1],0,ffg_s.color,a_canvas.width,a_canvas.height);
+		ani = window.requestAnimationFrame(animate);
+	};
+
+	function stop_animate(){
+		window.cancelAnimationFrame(ani);
+		t1.stop();
+		t2.stop();
+	}
+
+</script>

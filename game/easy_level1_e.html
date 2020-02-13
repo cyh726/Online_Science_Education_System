@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<style>
+	body {
+		padding: 0;
+		margin: 0;
+		background-color:#b6beaa;
+		overflow:hidden;
+	}
+	#spy {
+		position: absolute;
+		bottom:70px;
+		left:500px;
+	}
+	#dialogue{
+		position:absolute;
+		top:5%;
+		left:150px;
+		height:80px;
+		width:80%;
+		border: 2px solid #c87031;
+		border-radius: 30px;
+		background-color: #c87031;
+		text-align:center;
+		opacity:0.9;
+	}
+	#sentence {
+		margin:10px 50px;
+		color:#552500;
+		font-size: 32px;
+		font-weight: bold;
+		font-family: Papyrus 微軟正黑體;
+		opacity:0;
+	}
+	#mail{
+		position:absolute;
+		bottom:270px;
+		left:690px;
+	}
+	#letter{
+		position:absolute;
+		bottom:250px;
+		left:690px;
+		opacity:0;
+	}
+	#weapon{
+		position:absolute;
+		bottom:50px;
+		left:500px;
+		opacity:0;
+	}
+	</style>
+</head>
+<body>
+	<div id="animate">
+		<img id="spy" src="img/spy_o.png" height="350" width="200">
+		<img id="letter" src="img/letter.png" height="100" width="80">
+		<img id="mail" src="img/mail.png" height="60" width="80">
+		<img id="weapon" src="img/weapon_u.png" height="400" width="400">
+		<span id="dialogue"><p id="sentence"></p></span>
+	</div>
+</body>
+<script>
+	var sentence = document.getElementById("sentence");
+	var letter = document.getElementById("letter");
+	var mail = document.getElementById("mail");
+	var weapon = document.getElementById("weapon");
+    var spy = document.getElementById("spy");
+	var dialogue = document.getElementById("dialogue");
+	var tl = new TimelineLite();
+	
+	sentence.innerHTML="原來圓圈國得到消息";
+	
+	tl.to(sentence,0.5,{opacity:1});
+	setTimeout(function(){
+  		sentence.innerHTML="三角國發明了一種新武器";
+		tl.to(mail,0.5,{opacity:0})
+		.to(letter,0.5,{opacity:1})
+		.to([spy,letter],1,{left:"-=300px"})
+		.to(weapon,1,{opacity:1});
+  	},1500);
+	setTimeout(function(){
+  		sentence.innerHTML="希望MR.Spy得到武器的資料";
+		tl.to(weapon,2,{rotation:"360deg"})
+		.to(letter,0.5,{opacity:0})
+		.to(spy,1,{left:"320px"});
+  	},4500);
+	setTimeout(function(){
+  		sentence.innerHTML="於是MR.Spy前往軍事基地去竊取資料...";
+		TweenLite.to(spy,4,{left:"+=1200px",opacity:0});
+		TweenLite.to(weapon,4,{rotation:"1080deg",left:"+=1200px",opacity:0});
+  	},8000);
+	setTimeout(function(){
+		location.replace("../basic_challenge_level_select.html");
+  	},11500);
+</script>
+</html>
