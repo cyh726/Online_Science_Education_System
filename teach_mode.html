@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/ColorPropsPlugin.min.js"></script>
+	<style>
+	#animation{
+    position: absolute;
+    width: 700px;
+    height: 500px;
+    top:100px;
+    left:400px;
+    margin: 0;
+    padding: 0;
+    border: 10px solid;
+    border-radius: 5px;
+    border-color: #956C02;
+    background-color: #d49633;
+  } 
+  #sentence {
+    position:relative;
+    top:160;
+    left:210; 
+    color:#635b4c;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 微軟正黑體;
+    opacity: 0;
+  }
+  #sentence2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position:absolute;
+    top:35;
+    left:14; 
+    color:#635b4c;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 微軟正黑體;
+    opacity: 0;
+  }
+  #sentence4 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position:absolute;
+    top:35;
+    left:14; 
+    color:#635b4c;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 微軟正黑體;
+    opacity: 0;
+  }
+  #sentence3 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position:absolute;
+    top:200;
+    left:0; 
+    color:#635b4c;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 微軟正黑體;
+    opacity: 0;
+  }
+  #back1 {
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  } 
+  #back2 {
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  } 
+  #back3 {
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  } 
+  #people {
+    position: absolute;
+    top:80;
+    left:35;
+    opacity:0;
+  }
+  #people2 {
+    position: absolute;
+    top:80;
+    left:35;
+    opacity: 0;
+  } 
+  #lwing {
+    position: absolute;
+    top:112.5;
+    left:427;
+    opacity: 0;
+  } 
+  #rwing {
+    position: absolute;
+    top:118.5;
+    left:525;
+    opacity: 0;
+  }
+  #oldpeople {
+    position: absolute;
+    top:7;
+    left:490;
+    opacity: 0;
+  } 
+  #girl {
+    position: absolute;
+    top:162;
+    left:35;
+    opacity: 0;
+  }
+  #boy {
+    position: absolute;
+    top:162;
+    left:435;
+    opacity: 0;
+    transform: scaleX(-1);
+  }
+  #desk {
+    position: absolute;
+    top:285;
+    left:35;
+    opacity: 0;
+  }
+  #map {
+    position: absolute;
+    top:120;
+    left:35;
+    opacity: 0;
+  }
+  #map2 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #map3 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #map4 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #map5 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #map6 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #map7 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #map8 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #pmap2 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #pmap3 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #pmap4 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #pmap5 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #pmap6 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #pmap7 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #pmap8 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #mymap {
+    position: absolute;
+    top:0;
+    left:100;
+    opacity: 0;
+  }
+  #mmap {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #mmap2 {
+    position: absolute;
+    top:100;
+    left:50;
+    opacity: 0;
+  }
+  #l1 {
+    position: absolute;
+    top:440;
+    left:135;
+    opacity: 0;
+  }
+  #l2 {
+    position: absolute;
+    top:290;
+    left:175;
+    opacity: 0;
+  }
+  #l3 {
+    position: absolute;
+    top:440;
+    left:298;
+    opacity: 0;
+  }
+  #l5 {
+    position: absolute;
+    top:190;
+    left:260;
+    opacity: 0;
+  }
+  #l6 {
+    position: absolute;
+    top:232;
+    left:299;
+    opacity:0;
+  }
+  #l7 {
+    position: absolute;
+    top:285;
+    left:375;
+    opacity: 0;
+  }
+  #l8 {
+    position: absolute;
+    top:137;
+    left:335;
+    opacity: 0;
+  }
+  #l4 {
+    position: absolute;
+    top:137;
+    left:95;
+    opacity: 0;
+  }
+  #mail {
+    position: absolute;
+    top:220;
+    left:120;
+    opacity: 0;
+  }
+  #mail2 {
+    position: absolute;
+    top:285;
+    left:525;
+    opacity: 0;
+  }
+  #next {
+    position: absolute;
+    top:470px;
+    left:650px;
+    opacity: 0;
+    background-color:#2a1912; 
+    font-family: 微軟正黑體;
+    color:white;
+  }
+  #next:hover {
+    position: absolute;
+    top:470px;
+    left:650px;
+    opacity: 0;
+    background-color:#5e3000; 
+    font-family: 微軟正黑體;
+    color:white;
+	cursor:pointer;
+  }
+  #stopdo {
+    position: absolute;
+    top:470px;
+    left:583px;
+    opacity: 0;
+    background-color:#2a1912; 
+    font-family: 微軟正黑體;
+    color:white;
+  }
+  #stopdo:hover {
+    position: absolute;
+    top:470px;
+    left:583px;
+    opacity: 0;
+    background-color:#5e3000; 
+    font-family: 微軟正黑體;
+    color:white;
+	cursor:pointer;
+  }
+  #restartdo {
+    position: absolute;
+    top:470px;
+    left:617px;
+    opacity: 0;
+    background-color:#2a1912; 
+    font-family: 微軟正黑體;
+    color:white;
+  }
+  #restartdo:hover{
+    position: absolute;
+    top:470px;
+    left:617px;
+    opacity: 0;
+    background-color:#5e3000; 
+    font-family: 微軟正黑體;
+    color:white;
+	cursor:pointer;
+  }
+  #startdo{
+    position: absolute;
+    top:200px;
+    left:325px;
+    opacity: 1;
+    background-color:#2a1912; 
+    font-family: 微軟正黑體;
+    color:white;
+    width= 420;
+    height= 300;
+  }
+  #startdo:hover{
+    position: absolute;
+    top:200px;
+    left:325px;
+    opacity: 1;
+    background-color:#5e3000; 
+    font-family: 微軟正黑體;
+    color:white;
+    width= 420;
+    height= 300;
+	cursor:pointer;
+  }
+  #startdo2{
+    position: absolute;
+    top:305px;
+    left:320px;
+    opacity: 0;
+    background-color:#2a1912; 
+    font-family: 微軟正黑體;
+    color:white;
+    width= 420;
+    height= 300;
+	z-index:50;
+  }
+  #startdo2:hover{
+    position: absolute;
+    top:305px;
+    left:320px;
+    opacity: 0;
+    background-color:#5e3000; 
+    font-family: 微軟正黑體;
+    color:white;
+    width= 420;
+    height= 300;
+	cursor:pointer;
+	z-index:50;
+  }
+  #myrec {
+    position: absolute;
+    top:100;
+    left:450;
+    opacity: 0;
+  }
+  #writeinto {
+    position: absolute;
+    top:100;
+    left:450;
+    opacity: 0;
+  }
+  #sentence5 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position:absolute;
+    top:90;
+    left:520; 
+    color:white;
+    font-size: 70px;
+    font-weight: bold;
+    font-family: 微軟正黑體;
+    opacity: 0;
+  }
+  #sentence6 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position:absolute;
+    top:90;
+    left:496; 
+    color:white;
+    font-size: 70px;
+    font-weight: bold;
+    font-family: 微軟正黑體;
+    opacity: 0;
+  }
+	body,.select_menu,dl, dt, dd, ol, ul, li {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		outline: 0;
+		background-image:url("img/back4.png");
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	}
+	.select_menu {
+		margin: auto;
+		padding: 0 30px;
+	}
+	.select_menu ul li {
+		display: block;
+		float: left;
+		position: relative;
+	}
+	.select_menu ul li ul {
+		margin: -4px 0 0;
+		display: none;
+		position: absolute;
+		width: 198px;
+		z-index: 350;
+		border: 1px solid #E1E1E1;
+		height: 208px;
+		overflow: auto;
+		border-image: initial;
+	}
+	.select_menu ul li ul li {
+		background: #fff;
+	}
+	.select_menu ul li ul li a {
+		display: block;
+		padding: 0 10px;
+		font-size: 16px;
+		font-family: 微軟正黑體;
+		overflow: hidden;
+		line-height: 35px;
+		color:#555;
+		text-decoration: none;
+	}
+	.option_selected {
+		background: #c87031;
+		color: white;
+		display: block;
+		font-size: 22px;
+		font-family: 微軟正黑體;
+		margin-top: 9px;
+		text-align: center;
+		text-decoration: none;
+		position: relative;
+		width: 200px;
+		z-index: 400;
+	}
+	.option_list li{
+		float:none;
+		width:100%;
+	}
+	.hovered_item{
+		background: #eee;
+		font-weight: bold;
+		color:#333;
+	}
+	.number{
+		position: absolute;
+		right: 0px;
+		width: 22px;
+		background-color: #eee;
+		text-align: center;
+	}
+	#func_list{
+		display:none;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		background-color:black;
+		opacity:0.7;
+		width: 100px;
+		height: 100px;
+		color:white;
+		padding:5px;
+	}
+	#open_funlist{
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		cursor: pointer;
+		width:50px;
+		height:50px;
+	}
+	.icon{
+		width:40px;
+		height:40px;
+	}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.select_menu').each(function(){
+			var $this = $(this), 
+				$subMenu = $this.find("> ul li ul");
+						
+			$this.find(".option_selected").click(function(){
+				var $selected = $(this), 
+					$nowSelected = $('.selected');
+				$nowSelected.removeClass('selected').parents('.select_menu').find('ul li ul').hide();
+				
+				if($selected[0] != $nowSelected[0]){
+					$subMenu.toggle($selected.toggleClass('selected').hasClass('selected'));
+				}
+				
+				return false;
+			});
+			
+			$this.find(".option_list ul li a").click(function() {
+				var current = $(this),
+				menuname =n;
+				//連姞
+				location.href = current.attr("href");
+				$subMenu.hide();
+				return false;
+				
+			}).hover(function(){
+				$this.find('.hovered_item').removeClass('hovered_item');
+				$(this).addClass('hovered_item');
+			});
+		});
+		
+	}).click(function(){
+		$('.selected').removeClass('selected').parents('.select_menu').find('ul li ul').hide();
+	});	
+	</script>
+</head>
+<body style="overflow: hidden">
+<div class="select_menu">
+  <ul>
+    <li class="option_list">
+        <a class="option_selected" href="#">STEP</a>
+        <ul>
+            <li><a href="#" onclick="topage1()">第一節:源由<span class="number">1</span></a></li>
+			<li><a href="#" onclick="topage2()">第二節:故事開始<span class="number">2</span></a></li>
+			<li><a href="#" onclick="topage3()">第三節:解釋公開地圖<span class="number">3</span></a></li>
+			<li><a href="#" onclick="topage4()">第四節:說明加密數字(1)<span class="number">4</span></a></li>
+			<li><a href="#" onclick="topage5()">第五節:說明加密數字(2)<span class="number">5</span></a></li>
+			<li><a href="#" onclick="topage6()">第六節:說明解密方式<span class="number">6</span></a></li>
+        </ul>
+    </li>
+  </ul>
+</div>
+<img id="open_funlist" src="img/favorites.png">
+<div id="func_list">
+	<span class="func"><img class="icon" src="img/home.png">回首頁</span>
+	<span class="func"><img class="icon" src="img/speaker.png">靜音</span>
+</div>
+<div id="animation">
+    <img id="back1" src = 'img/back1.png' width="700" height="500";>
+    <img id="back2" src = 'img/back2.png' width="700" height="500";>
+    <img id="back3" src = 'img/back3.png' width="700" height="500";>
+    <img id="people" src = 'img/people.png' width="140" height="280";>
+    <img id="people2" src = 'img/people2.png' width="140" height="280";>
+    <img id="lwing" src = 'img/lwing.png' width="126" height="70";>
+    <img id="rwing" src = 'img/rwing.png' width="161" height="77";>
+    <img id="oldpeople" src = 'img/oldpeople.png' width="140" height="280";>
+    <img id="desk" src = 'img/desk.png' width="200" height="150";>
+    <img id="mail" src = 'img/mail.png' width="100" height="50";>
+    <img id="mail2" src = 'img/mail2.png' width="50" height="50";>
+    <img id="girl" src = 'img/girl.png' width="140" height="280";>
+    <img id="boy" src = 'img/boy.png' width="140" height="280";>
+    <img id="map" src = 'img/map.png' width="350" height="350";>
+    <img id="mmap" src = 'img/mmap.png' width="400" height="400";>
+    <img id="map2" src = 'img/map2.png' width="400" height="400";>
+    <img id="map3" src = 'img/map3.png' width="400" height="400";>
+    <img id="map4" src = 'img/map4.png' width="400" height="400";>
+    <img id="map5" src = 'img/map5.png' width="400" height="400";>
+    <img id="map6" src = 'img/map6.png' width="400" height="400";>
+    <img id="map7" src = 'img/map7.png' width="400" height="400";>
+    <img id="map8" src = 'img/map8.png' width="400" height="400";>
+    <img id="pmap2" src = 'img/2map2.png' width="400" height="400";>
+    <img id="pmap3" src = 'img/2map3.png' width="400" height="400";>
+    <img id="pmap4" src = 'img/2map4.png' width="400" height="400";>
+    <img id="pmap5" src = 'img/2map5.png' width="400" height="400";>
+    <img id="pmap6" src = 'img/2map6.png' width="400" height="400";>
+    <img id="pmap7" src = 'img/2map7.png' width="400" height="400";>
+    <img id="pmap8" src = 'img/2map8.png' width="400" height="400";>
+    <img id="l1" src = 'img/l1.png' width="70" height="45";>
+    <img id="l2" src = 'img/l2.png' width="70" height="45";>
+    <img id="l3" src = 'img/l3.png' width="70" height="45";>
+    <img id="l4" src = 'img/l4.png' width="70" height="45";>
+    <img id="l5" src = 'img/l5.png' width="70" height="45";>
+    <img id="l6" src = 'img/l6.png' width="70" height="45";>
+    <img id="l7" src = 'img/l7.png' width="70" height="45";>
+    <img id="l8" src = 'img/l8.png' width="70" height="45";>
+    <img id="mymap" src = 'img/mymap.png' width="500" height="500";>
+    <img id="mmap2" src = 'img/mmap2.png' width="350" height="350";>
+    <img id="myrec" src = 'img/myrec.png' width="200" height="100" onclick="writein()";>
+    <input type="text" id="writeinto" width="200" height="100">
+    <span id="next" width="140" height="70" onclick="changepage()";> 下一節 </span>
+    <span id="stopdo" width="100" height="50" onclick="stopdoan() ";> 暫停 </span>
+    <span id="restartdo" width="100" height="50" onclick="restartdoan()";> 繼續 </span>
+    <span id="startdo2" width="100" height="50" onclick="changepage3()";> RESTART </span>
+    <span id="startdo" width="100" height="50" onclick="changepage2()";> START </span>
+    <p id="sentence"></p>
+    <p id="sentence2"></p>
+    <p id="sentence3"></p>
+    <p id="sentence4"></p>
+    <p id="sentence5"></p>
+    <p id="sentence6"></p>
+  </div>
+	<audio autoplay loop>
+		<source src="audio/How_it_Began.mp3" type="audio/mpeg">
+	</audio>
+</body>
+<script type="text/javascript">
+var list = document.getElementById("func_list");
+var open = document.getElementById("open_funlist");
+var li = [];
+for(i=0;i<2;i++){
+	li[i] = document.getElementsByClassName("func")[i];
+	li[i].style.cursor="pointer";
+ }
+var flag = 0;
+document.getElementById("open_funlist").onclick=function(){
+	if(flag==0){
+		open.style.right="120px";
+		list.style.display="block";
+		flag=1;
+	}
+	else{
+		open.style.right="5px";
+		list.style.display="none";
+		flag=0;
+	}
+};
+li[0].onclick=function(){
+	location.assign("main.html");
+};
+var icon = document.getElementsByClassName("icon")[1];
+var speaker=0;
+var audio = document.getElementsByTagName('audio')[0];
+li[1].onclick=function(){
+	if(speaker==0){
+		icon.src="img/speakers.png";
+		li[1].childNodes[1].nodeValue="播放";
+		speaker=1;
+		audio.pause();
+	}
+	else{
+		icon.src="img/speaker.png";
+		li[1].childNodes[1].nodeValue="靜音";
+		speaker=0;
+		audio.play();
+	}
+};
+</script>
+<script type="text/javascript">
+    var a = 0;
+    var b = 0;
+    var t = 0;
+    var page = 0;
+    var time1, time2;
+    //var canvas = document.getElementById('myrec');
+    //var ctx = canvas.getContext('2d');
+    var stopdo = document.getElementById("stopdo");
+    var restartdo = document.getElementById("restartdo");
+    var startdo = document.getElementById("startdo");
+    var sentence = document.getElementById("sentence");
+    var sentence2 = document.getElementById("sentence2");
+    var sentence3 = document.getElementById("sentence3");
+    var sentence4 = document.getElementById("sentence4");
+    var people = document.getElementById("people");
+    var oldpeople = document.getElementById("oldpeople");
+    var girl = document.getElementById("girl");
+    var map = document.getElementById("map");
+    var map2 = document.getElementById("map2");
+    var map3 = document.getElementById("map3");
+    var map4 = document.getElementById("map4");
+    var map5 = document.getElementById("map5");
+    var map6 = document.getElementById("map6");
+    var map7 = document.getElementById("map7");
+    var map8 = document.getElementById("map8");
+    var pmap2 = document.getElementById("pmap2");
+    var pmap3 = document.getElementById("pmap3");
+    var pmap4 = document.getElementById("pmap4");
+    var pmap5 = document.getElementById("pmap5");
+    var pmap6 = document.getElementById("pmap6");
+    var pmap7 = document.getElementById("pmap7");
+    var pmap8 = document.getElementById("pmap8");
+    var mmap = document.getElementById("mmap");
+    var mmap2 = document.getElementById("mmap2");
+    var mymap = document.getElementById("mymap");
+    var l1 = document.getElementById("l1");
+    var l2 = document.getElementById("l2");
+    var l3 = document.getElementById("l3");
+    var l4 = document.getElementById("l4");
+    var l5 = document.getElementById("l5");
+    var l6 = document.getElementById("l6");
+    var l7 = document.getElementById("l7");
+    var l8 = document.getElementById("l8");
+    var myrec = document.getElementById("myrec");
+    var mail = document.getElementById("mail");
+    var mail2 = document.getElementById("mail2");
+    var next = document.getElementById("next");
+    var sentence5 = document.getElementById("sentence5");
+    var sentence6 = document.getElementById("sentence6");
+    var myrec = document.getElementById("myrec");
+    var boy = document.getElementById("boy");
+    var desk = document.getElementById("desk");
+    var back1 = document.getElementById("back1");
+    var back2 = document.getElementById("back2");
+    var back3 = document.getElementById("back3");
+    var k, k2, k3, n, n2, n3, n4, n5;
+    var s=0;
+    var w=0;
+	var wwwwww=0;
+    var nt=1;
+    var kt=1;
+    var p=0;
+    var wrong=0;
+	document.addEventListener("keydown", content);
+    function topage1(){
+      p=1;
+      page=1;
+      startdo.style.opacity=0;
+        startdo2.style.opacity=0;
+        back2.style.opacity=0;
+        back3.style.opacity=0;
+        back1.style.opacity=1;
+        next.style.opacity=1;
+        stopdo.style.opacity=1;
+        restartdo.style.opacity=1;
+      changepage();
+    }
+    function topage2(){
+      p=1;
+      page=2;
+      startdo.style.opacity=0;
+        startdo2.style.opacity=0;
+        back2.style.opacity=0;
+        back3.style.opacity=0;
+        back1.style.opacity=1;
+        next.style.opacity=1;
+        stopdo.style.opacity=1;
+        restartdo.style.opacity=1;
+      changepage();
+    }
+    function topage3(){
+      p=1;
+      page=3;
+      startdo.style.opacity=0;
+        startdo2.style.opacity=0;
+        back2.style.opacity=0;
+        back3.style.opacity=0;
+        back1.style.opacity=1;
+        next.style.opacity=1;
+        stopdo.style.opacity=1;
+        restartdo.style.opacity=1;
+      changepage();
+    }
+    function topage4(){
+      p=1;
+      page=4;
+      startdo.style.opacity=0;
+        startdo2.style.opacity=0;
+        back2.style.opacity=0;
+        back3.style.opacity=0;
+        back1.style.opacity=1;
+        next.style.opacity=1;
+        stopdo.style.opacity=1;
+        restartdo.style.opacity=1;
+      changepage();
+    }
+    function topage5(){
+      p=1;
+      page=5;
+      startdo.style.opacity=0;
+        startdo2.style.opacity=0;
+        back2.style.opacity=0;
+        back3.style.opacity=0;
+        back1.style.opacity=1;
+        next.style.opacity=1;
+        stopdo.style.opacity=1;
+        restartdo.style.opacity=1;
+      changepage();
+    }
+    function topage6(){
+      p=1;
+      page=6;
+      startdo.style.opacity=0;
+        startdo2.style.opacity=0;
+        back2.style.opacity=0;
+        back3.style.opacity=0;
+        back1.style.opacity=1;
+        next.style.opacity=1;
+        stopdo.style.opacity=1;
+        restartdo.style.opacity=1;
+      changepage();
+    }
+    function writein(){
+	  console.log("click in1");
+	  console.log("WW="+wwwwww);
+      if(wwwwww==1){
+	    kt=1;
+		clearTimeout(time1);
+        t=0;
+        console.log("content in");
+		wwwwww=3;
+      }
+      else if(wwwwww==2){
+	    nt=1;
+		clearTimeout(time1);
+        t=0;
+        console.log("content in2")
+		wwwwww=4;
+      }
+	  console.log("click in2");
+    }
+    function content(event){
+	if(wwwwww==3){
+      console.log("content in1-1");
+      clearTimeout(time1);
+      t=0;
+      if((event.keyCode>=96&&event.keyCode<=105)&&kt==1)
+      {
+	    console.log("key in1-1");
+        k = event.which || event.keyCode;
+        k=k-96;
+        sentence5.innerHTML=k;
+        kt=2;
+      }
+      else if((event.keyCode>=96&&event.keyCode<=105)&&kt==2)
+      {
+        k2 = event.which || event.keyCode;
+        k2=k2-96;
+        k3=k*10+k2;
+        sentence5.innerHTML= k3;
+        kt=3;
+      }
+      else if((event.keyCode==8)&&kt==2)
+      {
+        sentence5.innerHTML="";
+        kt=1;
+      }
+      else if((event.keyCode==8)&&kt==3)
+      {
+        sentence5.innerHTML=k;
+        kt=2;
+      }
+      else if((event.keyCode==13))
+      {
+        if(k3==40){
+          kt=4;
+          t=0;
+          page=5;
+          p=1;
+          wrong=1;
+          k=0;
+          k2=0;
+          k3=0;
+		  wwwwww=0;
+          sentence5.innerHTML="";
+          console.log("wrong="+wrong);
+          changepage();
+        }
+      }
+	 }
+	 else if(wwwwww==4){
+      console.log("content in2-1");
+      clearTimeout(time1);
+      t=0;
+      if((event.keyCode>=96&&event.keyCode<=105)&&nt==1)
+      {
+	    console.log("key in2-1");
+        n = event.which || event.keyCode;
+        n=n-96;
+        sentence6.innerHTML=n;
+        console.log(n);
+        nt=2;
+      }
+      else if((event.keyCode>=96&&event.keyCode<=105)&&nt==2)
+      {
+        n2 = event.which || event.keyCode;
+        n2=n2-96;
+        n3=n*10+n2;
+        sentence6.innerHTML= n3;
+        console.log(n3);
+        nt=3;
+      }
+      else if((event.keyCode>=96&&event.keyCode<=105)&&nt==3)
+      {
+        n4 = event.which || event.keyCode;
+        n4 =n4-96;
+        n5=n3*10+n4;
+        sentence6.innerHTML= n5;
+        console.log(n5);
+        nt=4;
+      }
+      else if((event.keyCode==8)&&nt==2)
+      {
+        sentence6.innerHTML="";
+        nt=1;
+      }
+      else if((event.keyCode==8)&&nt==3)
+      {
+        sentence6.innerHTML=n;
+        nt=2;
+      }
+      else if((event.keyCode==8)&&nt==4)
+      {
+        sentence6.innerHTML=n3;
+        nt=2;
+      }
+      else if((event.keyCode==13))
+      {
+        if(n5==220){
+          nt=5;
+          page=6;
+          t=0;
+          p=1;
+          n=0;
+          n2=0;
+          n3=0;
+          n4=0;
+          n5=0;
+		  wwwwww=0;
+          sentence6.innerHTML="";
+          changepage();
+        }
+      }
+	  }
+    }
+    function restartdoan(){
+      if(s==1){
+        t=t-1;
+        timeCount();
+        s=0;
+      }
+    }
+    function stopdoan(){
+      s=1;
+      clearTimeout(time1);
+    }
+    function changepage2(){
+      page=0;
+      s=0;
+      wwwwww=0;
+      nt=1;
+      kt=1;
+      p=0;
+      a = 0;
+      b = 0;
+      t = 0;
+      changepage();
+    }
+    function changepage3(){
+      page=0;
+      s=0;
+      wwwwww=0;
+      nt=1;
+      kt=1;
+      p=0;
+      a = 0;
+      b = 0;
+      t = 0;
+      changepage();
+    }
+    function changepage(){
+	sentence5.innerHTML="";
+	sentence6.innerHTML="";
+      if(page==0){
+        startdo.style.opacity=0;
+        startdo2.style.opacity=0;
+        back2.style.opacity=0;
+        back3.style.opacity=0;
+        back1.style.opacity=1;
+        next.style.opacity=1;
+        stopdo.style.opacity=1;
+        restartdo.style.opacity=1;
+      }
+      if(p==0 && page<7){
+        page++;
+      }
+      else{
+        p=0;
+      }
+      clearTimeout(time1);
+      t=0;
+      if(page==1){
+        time.to([mmap2,mail2,mymap,boy,desk,sentence6,mmap,l1,l2,l3,l4,l5,l6,l7,l8,myrec,sentence5,sentence4,mail,oldpeople,girl,people2,rwing,lwing,sentence2,sentence3,map,map2,map3,map4,map5,map6,map7,map8,pmap2,pmap3,pmap4,pmap5,pmap6,pmap7,pmap8,people,sentence],0.1,{opacity:0});
+        /*time.to([people,sentence],0.1,{opacity:1});*/
+      }
+      if(page==2){
+        time.to([oldpeople,girl,rwing,lwing,sentence2,mmap2,mail2,mymap,boy,desk,sentence6,mmap,l1,l2,l3,l4,l5,l6,l7,l8,myrec,sentence5,sentence4,mail,people,people2,sentence,sentence3,map,map2,map3,map4,map5,map6,map7,map8,pmap2,pmap3,pmap4,pmap5,pmap6,pmap7,pmap8],0.1,{opacity:0});
+        /*time.to([oldpeople,girl,rwing,lwing,sentence2],0.1,{opacity:1});*/
+      }
+      if(page==3){
+        time.to([mmap2,mail2,mymap,boy,desk,sentence6,mmap,l1,l2,l3,l4,l5,l6,l7,l8,myrec,sentence5,sentence4,mail,people,people2,sentence,sentence3,girl,map,map2,map3,map4,map5,map6,map7,map8,pmap2,pmap3,pmap4,pmap5,pmap6,pmap7,pmap8,oldpeople,rwing,lwing,sentence2],0.1,{opacity:0});
+        /*time.to([oldpeople,rwing,lwing,sentence2],0.1,{opacity:1});*/
+      }
+      if(page==4){
+        time.to([mmap2,mail2,mymap,boy,desk,sentence6,mmap,l1,l2,l3,l4,l5,l6,l7,l8,myrec,sentence5,sentence4,mail,oldpeople,rwing,lwing,map,people,people2,sentence,sentence2,girl,map,map2,map3,map4,map5,map6,map7,map8,pmap2,pmap3,pmap4,pmap5,pmap6,pmap7,pmap8,sentence3],0.1,{opacity:0});
+        /*time.to([sentence3],0.1,{opacity:1});*/
+      }
+      if(page==5){
+        time.to([mmap2,mail2,mymap,boy,desk,sentence6,mmap,l1,l2,l3,l4,l5,l6,l7,l8,myrec,sentence5,oldpeople,rwing,lwing,sentence4,mail,map,people,people2,sentence,sentence2,girl,map,map2,map3,map4,map5,map6,map7,map8,pmap2,pmap3,pmap4,pmap5,pmap6,pmap7,pmap8,sentence3],0.1,{opacity:0});
+        /*time.to([sentence3],0.1,{opacity:1});*/
+        wrong=2;
+        console.log("wrong="+wrong);
+      }
+      if(page==6){
+        time.to([mmap2,mail2,mymap,boy,desk,sentence6,mmap,l1,l2,l3,l4,l5,l6,l7,l8,myrec,sentence5,oldpeople,rwing,lwing,sentence4,mail,map,people,people2,sentence,sentence2,girl,map,map2,map3,map4,map5,map6,map7,map8,pmap2,pmap3,pmap4,pmap5,pmap6,pmap7,pmap8,sentence3],0.1,{opacity:0});
+        /*time.to([sentence3],0.1,{opacity:1});*/
+      }
+      if(page==7){
+        time.to([mmap2,mail2,mymap,boy,desk,sentence6,mmap,l1,l2,l3,l4,l5,l6,l7,l8,myrec,sentence5,oldpeople,rwing,lwing,sentence4,mail,map,people,people2,sentence,sentence2,girl,map,map2,map3,map4,map5,map6,map7,map8,pmap2,pmap3,pmap4,pmap5,pmap6,pmap7,pmap8,sentence3],0.1,{opacity:0});
+        startdo2.style.opacity=1;
+        back3.style.opacity=1;
+        back2.style.opacity=0;
+        back1.style.opacity=0;
+        next.style.opacity=0;
+        stopdo.style.opacity=0;
+        restartdo.style.opacity=0;
+      }
+      console.log("page="+page);
+      if(page<=6){
+        timeCount();
+      }
+    }
+    function timeCount()
+    {
+      /************************************************************************/
+      t=t+1;
+      console.log("time: "+t);
+      if(page==1){
+        firthpage();
+      }
+      if(page==2){
+        secondpage();
+      }
+      if(page==3){
+        thirdpage();
+      }
+      if(page==4){
+        fourpage();
+      }
+      if(page==5){
+        wrong=3;
+        console.log("wrong="+wrong);
+        fivepage();
+      }
+      if(page==6){
+        sixpage();
+      }
+      time1=setTimeout("timeCount()",1000);
+      console.log("time2: "+time);
+    }
+    var time = new TimelineLite();
+    function firthpage(){
+      if(t==1){
+        TweenLite.to([people,people2],0.1,{opacity:0,top:"80px",left:"35px"});
+        TweenLite.to([lwing],0.1,{opacity:0,top:"112.5px",left:"427px"});
+        TweenLite.to([rwing],0.1,{opacity:0,top:"118.5px",left:"525px"});
+        TweenLite.to([oldpeople],0.1,{opacity:0,top:"7px",left:"490px"});
+        TweenLite.to([sentence],0.1,{opacity:0,top:"160px",left:"210px"});
+      }
+      if(t==2){
+        sentence.innerHTML="我想要告訴XX一個秘密";
+        people.style.opacity=1
+        time.to([people2,sentence],1,{opacity:1});
+      }
+      if(t==4){
+        TweenLite.to([people2,sentence],1,{opacity:0});
+      }
+      //time.from(sentence,1, {opacity:0}).to(sentence,1, {left:"210px"});
+      if(t==6){
+        sentence.innerHTML="但我不想被別人知道";
+        time.to([people2,sentence],1,{opacity:1});
+      }
+      if(t==8){
+        time.to([people2,sentence],1,{opacity:0});
+      }
+      if(t==10){
+        sentence.innerHTML="我該怎麼做呢?";
+        time.to([people2,sentence],1,{opacity:1});
+      }
+      if(t==12){
+        TweenLite.to([people2,sentence],1,{opacity:0});
+        TweenLite.to([lwing],1,{opacity:0,top:"105.5px",left:"427px"});
+        TweenLite.to([rwing],1,{opacity:0,top:"111.5px",left:"525px"});
+        TweenLite.to([oldpeople],1,{opacity:0,top:"0px",left:"490px"});
+      }
+      if(t==14){
+        sentence.innerHTML=" ";
+        TweenLite.to([people],3,{top:"80px",left:"85px"});
+        TweenLite.to([lwing],3,{opacity:1,top:"112.5px",left:"422px"});
+        TweenLite.to([rwing],3,{opacity:1,top:"118.5px",left:"520px"});
+        TweenLite.to([oldpeople],3,{opacity:1,top:"7px",left:"485px"});
+        TweenLite.to([sentence],0.1,{opacity:0,top:"100px",left:"400px"});
+      }
+      if(t==18){
+        sentence.innerHTML="讓我來告訴你吧!!";
+        time.to([sentence],2,{opacity:1,top:"160px",left:"210px"});
+      }
+    }
+    function secondpage(){
+      if(t==1){
+        TweenLite.to([girl],0.1,{opacity:0,top:"182px",left:"35px",rotation:"0deg"});
+        TweenLite.to([lwing],0.1,{opacity:0,top:"112.5px",left:"427px"});
+        TweenLite.to([rwing],0.1,{opacity:0,top:"118.5px",left:"525px"});
+        TweenLite.to([oldpeople],0.1,{opacity:0,top:"7px",left:"490px"});
+        TweenLite.to([sentence2],0.1,{opacity:0,top:"35px",left:"14px"});
+        TweenLite.to([desk],0.1,{opacity:0,top:"285px",left:"405px"});
+        TweenLite.to([mail],0.1,{opacity:0,top:"242px",left:"120px"});
+      }
+      if(t==2){
+        sentence2.innerHTML="很久很久以前，有一個叫K醬的同學";
+        TweenLite.to([sentence2],1,{opacity:1});
+        TweenLite.to([girl],1,{opacity:1});
+      }
+      //time.from(sentence,1, {opacity:0}).to(sentence,1, {left:"210px"});
+      if(t==4){
+        time.to([sentence2],1,{opacity:0});
+        desk.style.opacity=1;
+      }
+      if(t==6){
+        sentence2.innerHTML="她想對MR.Spy說I Love You <3 (520)，但她怕被別人知道";
+        time.to([sentence2,mail],1,{opacity:1});
+      }
+      if(t==8){
+        sentence2.innerHTML="所以她用加密解密的方式傳送訊息";
+        time.to([girl,mail],4,{left:"+=300px"});
+      }
+      if(t==12){
+        TweenLite.to([girl],1,{rotation:"15deg"});
+        TweenLite.to([mail],1,{top:"265px",left:"430px"});
+      }
+      if(t==14){
+        TweenLite.to([girl],1,{rotation:"0deg"});
+      }
+    }
+    function thirdpage(){
+      if(t==1){
+        TweenLite.to([lwing],0.1,{opacity:0,top:"112.5px",left:"427px"});
+        TweenLite.to([rwing],0.1,{opacity:0,top:"118.5px",left:"525px"});
+        TweenLite.to([oldpeople],0.1,{opacity:0,top:"7px",left:"490px"});
+        TweenLite.to([sentence2],0.1,{opacity:0,top:"35px",left:"14px"});
+        TweenLite.to([sentence3],0.1,{opacity:0,top:"200px",left:"10px"});
+        TweenLite.to([map],0.1,{opacity:0,top:"120px",left:"35px"});
+      }
+      if(t==2){
+        time.to([map],1,{opacity:1});
+        sentence2.innerHTML="這是MR.Spy給大家的公開地圖";
+        time.to([sentence2],1,{opacity:1});
+      }
+      if(t==5){
+        time.to([sentence2],1,{opacity:0});
+      }
+      if(t==7){
+        sentence2.innerHTML="公開地圖，就像是一把鎖，把你要傳給MR.Spy的訊息鎖(加密)起來，只有MR.Spy的鑰匙能打開(解密)";
+        time.to([sentence2],1,{opacity:1});
+      }
+      if(t==12){
+        time.to([sentence2],1,{opacity:0});
+      }
+      if(t==14){
+        time.to([map],1,{opacity:0});
+        sentence3.innerHTML="接著讓我來告訴你";
+        time.to([sentence3],1,{opacity:1});
+      }
+      if(t==17){
+        time.to([sentence3],1,{opacity:0});
+      }
+      if(t==19){
+        sentence3.innerHTML="K醬怎麼使用這個公開地圖傳送訊息吧";
+        time.to([sentence3],1,{opacity:1});
+      }
+      //time.from(sentence,1, {opacity:0}).to(sentence,1, {left:"210px"});
+    }
+    function fourpage(){
+      if(t==1){
+        TweenLite.to([sentence5],0.1,{opacity:0,top:"90px",left:"500px"});
+        TweenLite.to([sentence4],0.1,{opacity:0,top:"35px",left:"14px"});
+        TweenLite.to([sentence3],0.1,{opacity:0,top:"200px",left:"10px"});
+        TweenLite.to([map],0.1,{opacity:0,top:"120px",left:"35px"});
+        TweenLite.to([map2],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([map3],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([map4],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([map5],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([map6],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([map7],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([map8],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([myrec],0.1,{opacity:0,top:"100px",left:"450px"});
+      }
+      if(t==2){
+        sentence3.innerHTML="首先，要讓節點總和為我們要傳送的數字";
+        time.to([sentence3],1,{opacity:1});
+      }
+      if(t==4){
+        time.to([sentence3],1,{opacity:0});
+      }
+      if(t==6){
+        sentence4.innerHTML="520=100+?+?+?+?+?+?+?";
+        map2.style.opacity=1;
+        sentence4.style.opacity=1;
+      }
+      if(t==10){
+        sentence4.innerHTML="520=100+120+?+?+?+?+?+?";
+        map2.style.opacity=0;
+        map3.style.opacity=1;
+        sentence4.style.opacity=1;
+      }
+      if(t==14){
+        sentence4.innerHTML="520=100+120+50+?+?+?+?+?";
+        map3.style.opacity=0;
+        map4.style.opacity=1;
+        sentence4.style.opacity=1;
+      }
+      //time.from(sentence,1, {opacity:0}).to(sentence,1, {left:"210px"});
+      if(t==15){
+        sentence4.innerHTML="520=100+120+50+30+?+?+?+?";
+        map4.style.opacity=0;
+        map5.style.opacity=1;
+        sentence4.style.opacity=1;
+      }
+      if(t==16){
+        sentence4.innerHTML="520=100+120+50+30+70+?+?+?";
+        map5.style.opacity=0;
+        map6.style.opacity=1;
+        sentence4.style.opacity=1;
+      }
+      if(t==17){
+        sentence4.innerHTML="520=100+120+50+30+70+90+?+?";
+        map6.style.opacity=0;
+        map7.style.opacity=1;
+        sentence4.style.opacity=1;
+      }
+      if(t==18){
+        sentence4.innerHTML="520=100+120+50+30+70+90+20+?";
+        map7.style.opacity=0;
+        map8.style.opacity=1;
+        sentence4.style.opacity=1;
+      }
+      if(t==19){
+        sentence4.innerHTML="換你試試看?要填入多少數字到圈圈6呢?";
+        sentence4.style.opacity=1;
+      }
+      if(t==20){
+	    wwwwww=1;
+		console.log("W="+wwwwww);
+        myrec.style.opacity=1;
+        sentence5.style.opacity=1;
+      }
+    }
+    function fivepage(){
+      wrong=4;
+      console.log("wrong="+wrong);
+      if(t==1){
+        TweenLite.to([sentence6],0.1,{opacity:0,top:"90px",left:"476px"});
+        TweenLite.to([sentence4],0.1,{opacity:0,top:"35px",left:"14px"});
+        TweenLite.to([sentence3],0.1,{opacity:0,top:"200px",left:"10px"});
+        TweenLite.to([mmap],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([pmap2],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([pmap3],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([pmap4],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([pmap5],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([pmap6],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([pmap7],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([pmap8],0.1,{opacity:0,top:"100px",left:"50px"});
+        TweenLite.to([myrec],0.1,{opacity:0,top:"100px",left:"450px"});
+        TweenLite.to([l1],0.1,{opacity:0,top:"445px",left:"135px"});
+        TweenLite.to([l2],0.1,{opacity:0,top:"295px",left:"175px"});
+        TweenLite.to([l3],0.1,{opacity:0,top:"445px",left:"298px"});
+        TweenLite.to([l4],0.1,{opacity:0,top:"142px",left:"95px"});
+        TweenLite.to([l5],0.1,{opacity:0,top:"195px",left:"260px"});
+        TweenLite.to([l6],0.1,{opacity:0,top:"237px",left:"299px"});
+        TweenLite.to([l7],0.1,{opacity:0,top:"290px",left:"375px"});
+        TweenLite.to([l8],0.1,{opacity:0,top:"142px",left:"335px"});
+      }
+      if(t==2){
+        sentence3.innerHTML="接著，我們要把相鄰的節點加起來";
+        sentence3.style.opacity=1;
+      }
+      if(t==4){
+        sentence3.style.opacity=0;
+        sentence4.innerHTML="300=100+120+50+30";
+        sentence4.style.opacity=1;
+        mmap.style.opacity=1;
+        l1.style.opacity=1;
+        l2.style.opacity=1;
+        l3.style.opacity=1;
+        l4.style.opacity=1;
+      }
+      if(t==6){
+        time.to([l4,l2,l3,l1], 2, {left:"135px",top:"445px"});
+      }
+      if(t==9){
+        time.to([mmap,l1,l2,l3,l4], 1, {opacity:0});
+        pmap2.style.opacity=1;
+      }
+      if(t==11){
+        pmap2.style.opacity=0;
+        sentence4.innerHTML="390=100+120+50+30+70+20";
+        mmap.style.opacity=1;
+        TweenLite.to(l1,1,{left:"135px",top:"445px"});
+        TweenLite.to(l2,1,{left:"175px",top:"295px"});
+        TweenLite.to(l3,1,{left:"298px",top:"445px"});
+        TweenLite.to(l4,1,{left:"95px",top:"142px"});
+        TweenLite.to(l5,1,{left:"260px",top:"195px"});
+        TweenLite.to(l7,1,{left:"375px",top:"290px"});
+      }
+      if(t==13){
+        l1.style.opacity=1;
+        l2.style.opacity=1;
+        l3.style.opacity=1;
+        l4.style.opacity=1;
+        l5.style.opacity=1;
+        l7.style.opacity=1;
+      }
+      if(t==15){
+        time.to([l4,l1,l5,l7,l3], 2, {left:"175px",top:"295px"});
+      }
+      if(t==18){
+        time.to([mmap,l1,l2,l3,l4,l5,l7], 1, {opacity:0});
+        pmap3.style.opacity=1;
+      }
+      if(t==20){
+        pmap3.style.opacity=0;
+        sentence4.innerHTML="290=100+120+50+20";
+        mmap.style.opacity=1;
+        TweenLite.to(l1,1,{left:"135px",top:"445px"});
+        TweenLite.to(l2,1,{left:"175px",top:"295px"});
+        TweenLite.to(l3,1,{left:"298px",top:"445px"});
+        TweenLite.to(l7,1,{left:"375px",top:"290px"});
+      }
+      if(t==21){
+        l1.style.opacity=1;
+        l2.style.opacity=1;
+        l3.style.opacity=1;
+        l7.style.opacity=1;
+      }
+      if(t==22){
+        time.to([l1,l2,l7,l3], 1, {left:"298px",top:"445px"});
+      }
+      if(t==23){
+        time.to([mmap,l1,l2,l3,l7], 1, {opacity:0});
+        pmap4.style.opacity=1;
+      }
+      if(t==25){
+        pmap4.style.opacity=0;
+        sentence4.innerHTML="320=100+120+30+70";
+        mmap.style.opacity=1;
+        TweenLite.to(l1,1,{left:"135px",top:"445px"});
+        TweenLite.to(l2,1,{left:"175px",top:"295px"});
+        TweenLite.to(l4,1,{left:"95px",top:"142px"});
+        TweenLite.to(l5,1,{left:"260px",top:"195px"});
+      }
+      if(t==26){
+        l1.style.opacity=1;
+        l2.style.opacity=1;
+        l4.style.opacity=1;
+        l5.style.opacity=1;
+      }
+      if(t==27){
+        time.to([l1,l2,l4,l5], 1, {left:"95px",top:"142px"});
+      }
+      if(t==28){
+        time.to([mmap,l1,l2,l4,l5], 1, {opacity:0});
+        pmap5.style.opacity=1;
+      }
+      if(t==30){
+        pmap5.style.opacity=0;
+        sentence4.innerHTML="350=120+30+70+90+40";
+        mmap.style.opacity=1;
+        TweenLite.to(l2,1,{left:"175px",top:"295px"});
+        TweenLite.to(l4,1,{left:"95px",top:"142px"});
+        TweenLite.to(l5,1,{left:"260px",top:"195px"});
+        TweenLite.to(l6,1,{left:"299px",top:"237px"});
+        TweenLite.to(l8,1,{left:"335px",top:"142px"});
+      }
+      if(t==31){
+        l6.style.opacity=1;
+        l2.style.opacity=1;
+        l4.style.opacity=1;
+        l5.style.opacity=1;
+        l8.style.opacity=1;
+      }
+      if(t==32){
+        time.to([l6,l2,l4,l8], 1, {left:"260px",top:"195px"});
+      }
+      if(t==33){
+        time.to([mmap,l6,l2,l4,l5,l8], 1, {opacity:0});
+        pmap6.style.opacity=1;
+      }
+      if(t==35){
+        pmap6.style.opacity=0;
+        sentence4.innerHTML="220=70+90+20+40";
+        mmap.style.opacity=1;
+        TweenLite.to(l5,1,{left:"260px",top:"195px"});
+        TweenLite.to(l6,1,{left:"299px",top:"237px"});
+        TweenLite.to(l7,1,{left:"375px",top:"290px"});
+        TweenLite.to(l8,1,{left:"335px",top:"142px"});
+      }
+      if(t==36){
+        l6.style.opacity=1;
+        l7.style.opacity=1;
+        l5.style.opacity=1;
+        l8.style.opacity=1;
+      }
+      if(t==37){
+        time.to([l6,l5,l7,l8], 1, {left:"299px",top:"237px"});
+      }
+      if(t==38){
+        time.to([mmap,l6,l7,l8,l5], 1, {opacity:0});
+        pmap7.style.opacity=1;
+      }
+      if(t==40){
+        pmap7.style.opacity=0;
+        sentence4.innerHTML="320=120+50+90+20+40";
+        mmap.style.opacity=1;
+        TweenLite.to(l2,1,{left:"175px",top:"295px"});
+        TweenLite.to(l3,1,{left:"298px",top:"445px"});
+        TweenLite.to(l6,1,{left:"299px",top:"237px"});
+        TweenLite.to(l7,1,{left:"375px",top:"290px"});
+        TweenLite.to(l8,1,{left:"335px",top:"142px"});
+      }
+      if(t==41){
+        l2.style.opacity=1;
+        l3.style.opacity=1;
+        l6.style.opacity=1;
+        l7.style.opacity=1;
+        l8.style.opacity=1;
+      }
+      if(t==42){
+        time.to([l6,l2,l3,l7,l8], 1, {left:"375px",top:"290px"});
+      }
+      if(t==43){
+        time.to([mmap,l6,l7,l8,l2,l3], 1, {opacity:0});
+        pmap8.style.opacity=1;
+      }
+      if(t==45){
+        pmap8.style.opacity=0;
+        sentence4.innerHTML="換你試試看?要填入多少數字到圈圈6呢?";
+        mmap.style.opacity=1;
+        TweenLite.to(l5,1,{left:"260px",top:"195px"});
+        TweenLite.to(l6,1,{left:"299px",top:"237px"});
+        TweenLite.to(l7,1,{left:"375px",top:"290px"});
+        TweenLite.to(l8,1,{left:"335px",top:"142px"});
+      }
+      if(t==46){
+        l5.style.opacity=1;
+        l6.style.opacity=1;
+        l7.style.opacity=1;
+        l8.style.opacity=1;
+      }
+      if(t==47){
+	    wwwwww=2;
+		console.log("W="+wwwwww);
+        myrec.style.opacity=1;
+        sentence6.style.opacity=1;
+      }
+    }
+    function sixpage(){
+      if(t==1){
+        TweenLite.to([sentence4],0.1,{opacity:0,top:"35px",left:"14px"});
+        TweenLite.to([sentence3],0.1,{opacity:0,top:"200px",left:"10px"});
+        TweenLite.to([boy],0.1,{opacity:0,top:"162px",left:"435px",scaleX:"-1",transform:"scaleX(-1)"});
+        TweenLite.to([desk],0.1,{opacity:0,top:"285px",left:"35px"});
+        TweenLite.to([mail],0.1,{opacity:0,top:"285px",left:"75px"});
+        TweenLite.to([mail2],0.1,{opacity:0,top:"285px",left:"525px"});
+        TweenLite.to([mymap],0.1,{opacity:0,top:"0px",left:"100px"});
+        TweenLite.to([people,people2],0.1,{opacity:0,top:"80px",left:"35px"});
+        TweenLite.to([lwing],0.1,{opacity:0,top:"112.5px",left:"427px"});
+        TweenLite.to([rwing],0.1,{opacity:0,top:"118.5px",left:"525px"});
+        TweenLite.to([oldpeople],0.1,{opacity:0,top:"7px",left:"490px"});
+        TweenLite.to([sentence],0.1,{opacity:0,top:"160px",left:"210px"});
+      }
+      if(t==2){
+        sentence3.innerHTML="加密技術教學結束囉，接下來看看如何解密吧";
+        time.to([sentence3],1,{opacity:1});
+      }
+      if(t==4){
+        TweenLite.to([mail],1,{left:"75px",top:"285px"});
+        TweenLite.to([mymap],1,{left:"75px",top:"285px",width:"100px",height:"100px"});
+        time.to([sentence3],1,{opacity:0});
+      }
+      if(t==7){
+        sentence4.innerHTML="MR.Spy發現一封信";
+        desk.style.opacity=1;
+        mail.style.opacity=1;
+        TweenLite.to([sentence4],1,{opacity:1});
+        TweenLite.to([boy],2,{opacity:1,left:"130px"});
+      }
+      if(t==10){
+        sentence4.innerHTML="MR.Spy拿到K醬給他的信";
+        time.to([boy],1,{rotation:"145deg"});
+      }
+      if(t==12){
+        TweenLite.to([boy],1,{transform:"scaleX(-1)"});
+        TweenLite.to([mail],1,{left:"100px",top:"245px"});
+      }
+      if(t==14){
+        TweenLite.to([boy],2,{opacity:0});
+        TweenLite.to([mail],3,{width:"400px",height:"200px",top:"200px"});
+      }
+      if(t==16){
+        TweenLite.to([mail],3,{width:"100px",height:"50px",top:"245px"});
+        TweenLite.to([mail],3,{opacity:0});
+      }
+      if(t==18){
+        sentence4.style.opacity=0;
+        TweenLite.to([mymap],3,{opacity:1,width:"400px",height:"400px",top:"100px",left:"100px"});
+      }
+      if(t==21){
+        time.to([mymap],1,{opacity:0,width:"100px",height:"100px",top:"245px",left:"75px"});
+        mail.style.opacity=1;
+        boy.style.opacity=1;
+      }
+      if(t==23){
+        sentence4.innerHTML="MR.Spy把信封放入口袋";
+        sentence4.style.opacity=1;
+        TweenLite.to([mail],1,{opacity:0,width:"100px",height:"50px",top:"250px",left:"130px"});
+      }
+      if(t==25){
+        sentence4.innerHTML="MR.Spy準備回家拿他的私密地圖";
+        TweenLite.to([boy],1,{opacity:1,scaleX:-1});
+      }
+      if(t==27){
+        TweenLite.to([boy],2,{opacity:1,left:"450px"});
+        TweenLite.to([desk],02,{opacity:0});
+      }
+      if(t==29){
+        TweenLite.to([boy],2,{opacity:0,left:"550px"});
+      }
+      if(t==31){
+        TweenLite.to([boy],0.5,{opacity:0,top:"162px",left:"30px"});
+        TweenLite.to([desk],0.5,{opacity:0,top:"285px",left:"450px"});
+      }
+      if(t==33){
+        TweenLite.to([boy],2,{opacity:1,top:"162px",left:"130px"});
+        TweenLite.to([desk],1,{opacity:1});
+        TweenLite.to([mail2],1,{opacity:1});
+      }
+      if(t==35){
+        TweenLite.to([boy],3,{opacity:1,top:"162px",left:"410px"});
+      }
+      if(t==37){
+        TweenLite.to([boy],1,{opacity:1,rotation:"210deg"});
+      }
+      if(t==39){
+        sentence4.innerHTML="MR.Spy拿到私密地圖";
+        sentence4.style.opacity=1;
+        TweenLite.to([boy],1,{rotation:"180deg"});
+        TweenLite.to([mail2],1,{top:"202px",left:"510px"});
+        TweenLite.to([mail],1,{opacity:0,width:"80px",height:"40px",top:"230px",left:"430px"});
+        TweenLite.to([mail2],1,{top:"202px",left:"510px"});
+        TweenLite.to([mail],1,{opacity:0,width:"80px",height:"40px",top:"230px",left:"430px"});
+        TweenLite.to([mymap],1,{opacity:0,width:"100px",height:"100px",top:"230px",left:"470px"});
+        TweenLite.to([mmap2],1,{opacity:0,width:"100px",height:"100px",top:"230px",left:"470px"});
+      }
+      if(t==41){
+        sentence4.innerHTML="MR.Spy拿出剛剛K醬給他的信";
+        TweenLite.to([mail],1,{opacity:1,width:"80px",height:"40px",top:"230px",left:"470px"});
+      }
+      if(t==43){
+        sentence4.innerHTML="MR.Spy開始解密";
+        TweenLite.to([boy,mail,mail2,desk],1,{opacity:0});
+        TweenLite.to([mymap],2,{opacity:1,width:"350px",height:"350px",top:"100px",left:"0px"});
+        TweenLite.to([mmap2],2,{opacity:1,width:"350px",height:"350px",top:"100px",left:"350px"});
+      }
+      if(t==45){
+        sentence4.innerHTML="解密方法，就是把大圈圈內的數字相加";
+        TweenLite.to([boy,mail,mail2,desk],1,{opacity:0});
+        TweenLite.to([mymap],2,{opacity:1,width:"350px",height:"350px",top:"100px",left:"0px"});
+        TweenLite.to([mmap2],2,{opacity:1,width:"350px",height:"350px",top:"100px",left:"350px"});
+      }
+      if(t==48){
+        sentence4.innerHTML="300+220=520，MR.Spy得到K醬傳的訊息";
+      }
+      if(t==50){
+        TweenLite.to([sentence4,mymap,mmap2],1,{opacity:0});
+        TweenLite.to([lwing],1,{opacity:0,top:"105.5px",left:"427px"});
+        TweenLite.to([rwing],1,{opacity:0,top:"111.5px",left:"525px"});
+        TweenLite.to([oldpeople],1,{opacity:0,top:"0px",left:"490px"});
+      }
+      if(t==52){
+        TweenLite.to([lwing],3,{opacity:1,top:"112.5px",left:"422px"});
+        TweenLite.to([rwing],3,{opacity:1,top:"118.5px",left:"520px"});
+        TweenLite.to([oldpeople],3,{opacity:1,top:"7px",left:"485px"});
+        TweenLite.to([sentence],0.1,{opacity:0,top:"100px",left:"400px"});
+        TweenLite.to([people],2,{opacity:1});
+      }
+      if(t==56){
+        sentence.innerHTML="這就是加密解密的方法";
+        time.to([sentence],2,{opacity:1,top:"220px",left:"200px"});
+      }
+      if(t==59){
+        time.to([sentence],1,{opacity:0});
+        time.to([sentence],1,{top:"220px",left:"200px"});
+      }
+      if(t==61){
+        sentence.innerHTML="原來如此，我懂了";
+        TweenLite.to([people2],1,{opacity:1});
+        TweenLite.to([sentence],1,{opacity:1});
+      }
+      if(t==63){
+        sentence.innerHTML="就是說地圖越複雜";
+      }
+      if(t==65){
+        sentence.innerHTML="別人就很難得到我傳的資訊";
+      }
+    }
+    /*function draw(){
+      console.log("in");
+      ctx.fillStyle = "rgba(193, 118, 37, 0.5)";
+      ctx.fillRect (500, 0, 150, 150);
+    }*/
+  </script>
+</html>
