@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公開金鑰加密系統</title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<style>
+	body {
+		padding: 0; margin: 0;
+	}
+	div {
+		display: block;
+		position: absolute;
+		height: 100vh;
+		width:100%;
+	}
+	#info {
+		position: absolute;
+		bottom:30px;
+		width:500px;
+		border: 10px dotted #382612;
+		border-radius: 10px;
+		background-color: #6d7c55;
+		padding:40px 0 40px 0;
+		text-align: center;
+		color: :#642c0b;
+		font-family: 微軟正黑體;
+		font-size:20px;
+	}
+	#selector-container {
+		background-color: #fae4bb;
+		display:flex;
+		justify-content:center;
+		flex-wrap:wrap;
+	}
+	.canvas {
+		margin:60% 100px 0 100px;
+		cursor:pointer;
+	}
+	a {
+		cursor:default;
+	}
+	#func_list{
+		display:none;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		background-color:black;
+		opacity:0.7;
+		width: 100px;
+		height: 80px;
+		color:white;
+		padding:5px;
+	}
+	#open_funlist{
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		cursor: pointer;
+		width:50px;
+		height:50px;
+	}
+	.icon{
+		width:40px;
+		height:40px;
+	}
+	</style>
+</head>
+<body>
+	<div id="selector-container">
+		<a href="teach_mode.html"><canvas class="canvas" id="c0" width="200" height="200"></canvas></a>
+		<a href="challenge_mode_difficulty.html"><canvas class="canvas" id="c1" width="200" height="200"></canvas></a>
+	</div>
+	<img src="img/title.png" style="position:fixed;top:50px;margin-left:31%;height:60px;width:500px">
+	<span id="info"></span>
+	<img src="img/fish_name.png" style="position:fixed;top:10px;margin-left:17%;height:200px;width:120px">
+	<img id="girl" src="img/girl_name.png" style="position:fixed;bottom:30px;left:10%;height:200px;width:100px">
+	<img src="img/boy_name.png" style="position:fixed;top:10px;margin-left:75%;height:200px;width:120px">
+	<img id="open_funlist" src="img/favorites.png">
+	<div id="func_list">
+		<p class="func"><img class="icon" src="img/speaker.png">靜音</p>
+	</div>
+	<audio autoplay loop>
+		<source src="audio/Crystal.mp3" type="audio/mpeg">
+	</audio>
+</body>
+<script type="text/javascript">
+$("span").fadeOut(1);
+
+var c = document.getElementsByClassName("canvas");
+var girl = document.getElementById("girl");
+
+var ctx = [];
+ctx[0] = c[0].getContext("2d");
+ctx[1] = c[1].getContext("2d");
+
+for(i=0;i<2;i++){
+	ctx[i].arc(100,100,99,0,2*Math.PI);
+	ctx[i].fillStyle="#8d5f2d";
+	ctx[i].fill();
+	ctx[i].beginPath();
+	ctx[i].arc(100,100,80,0,2*Math.PI);
+	ctx[i].fillStyle="#e4b898";
+	ctx[i].fill();
+	ctx[i].beginPath();
+	ctx[i].arc(100,100,60,0,2*Math.PI);
+	ctx[i].fillStyle="#fae4bb";
+	ctx[i].fill();
+	topic(i,0);
+}
+function content(i){
+	switch(i){
+		case 0:
+			$("span").css("left","15%");
+			$("span").text("一步步學習，如何利用加密解密製作一份公開金鑰地圖。");
+			girl.style.left="10%";
+			break;
+		case 1:
+			$("span").css("left","45%");
+			$("span").text("挑戰遊戲!試試自己熟不熟悉地圖加密解密原理。");
+			girl.style.left="40%";
+			break;
+	}
+}
+function topic(i,size){
+	var x,y;
+	ctx[i].fillStyle = '#2a1c05';
+	if(size==1){
+		ctx[i].font="40px 微軟正黑體";
+		y=5;
+		x=-12;
+	}
+	else{
+		ctx[i].font="30px 微軟正黑體";
+		x=0;
+		y=0;
+	}
+	switch(i){
+		case 0:
+			ctx[0].fillText("教學",70+x,110+y);
+			break;
+		case 1:
+			ctx[1].fillText("闖關遊戲",40+x,110+y);
+			break;
+	}
+}
+function bigcircle(i){
+	content(i);
+	$("span").fadeIn();
+	var radius=60;
+	var id=setInterval(increase,10);
+	
+	function increase(){
+		if (radius>101){
+			clearInterval(id);
+		} 
+		else{
+			ctx[i].arc(100,100,radius++,0,2*Math.PI);
+			ctx[i].fillStyle="#fae4bb";
+			ctx[i].fill();
+			topic(i,1);
+		}
+	}
+}
+function smallcircle(i){
+	$("span").fadeOut(1);
+	var radius=101;
+	var id=setInterval(decrease,10);
+
+	function decrease(){
+		if (radius<60){
+			clearInterval(id);
+		} 
+		else{
+			ctx[i].clearRect(0,0,200,200);
+			ctx[i].arc(100,100,100,0,2*Math.PI);
+			ctx[i].fillStyle="#8d5f2d";
+			ctx[i].fill();
+			if(radius<=80){
+				ctx[i].beginPath();
+				ctx[i].arc(100,100,80,0,2*Math.PI);
+				ctx[i].fillStyle="#e4b898";
+				ctx[i].fill();
+			}
+			ctx[i].beginPath();
+			ctx[i].arc(100,100,radius--,0,2*Math.PI);
+			ctx[i].fillStyle="#fae4bb";
+			ctx[i].fill();
+			topic(i,0);
+		}
+	}
+}
+$(document).ready(function(){
+    $("#c0").hover(function(){bigcircle(0)},function(){smallcircle(0)});
+	$("#c1").hover(function(){bigcircle(1)},function(){smallcircle(1)});
+});
+</script>
+<script type="text/javascript">
+var list = document.getElementById("func_list");
+var open = document.getElementById("open_funlist");
+var li = [];
+for(i=0;i<1;i++){
+	li[i] = document.getElementsByClassName("func")[i];
+	li[i].style.cursor="pointer";
+ }
+var flag = 0;
+document.getElementById("open_funlist").onclick=function(){
+	if(flag==0){
+		open.style.right="120px";
+		list.style.display="block";
+		flag=1;
+	}
+	else{
+		open.style.right="5px";
+		list.style.display="none";
+		flag=0;
+	}
+};
+var icon = document.getElementsByClassName("icon")[0];
+var speaker=0;
+var audio = document.getElementsByTagName('audio')[0];
+li[0].onclick=function(){
+	if(speaker==0){
+		icon.src="img/speakers.png";
+		li[0].childNodes[1].nodeValue="播放";
+		speaker=1;
+		audio.pause();
+	}
+	else{
+		icon.src="img/speaker.png";
+		li[0].childNodes[1].nodeValue="靜音";
+		speaker=0;
+		audio.play();
+	}
+};
+</script>
+</html>
