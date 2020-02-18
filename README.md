@@ -1,2 +1,5 @@
-# Online_Science_Education_System
-A website for teaching knowledge of computer science through web animations and games
+# Online Science Education System
+## Architecture
+![](https://i.imgur.com/W3NRQE7.png)
+## Demo 
+![](https://i.imgur.com/vNxpvmH.gif)
